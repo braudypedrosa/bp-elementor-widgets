@@ -120,7 +120,7 @@ class Widgets_Manager {
 	/**
 	 * Get Available Widgets
 	 *
-	 * Returns the array of all available widgets.
+	 * Returns the array of all available widgets, sorted alphabetically by title.
 	 * Used by the settings page to display the widget list.
 	 *
 	 * @since 1.0.0
@@ -128,7 +128,14 @@ class Widgets_Manager {
 	 * @return array Array of available widgets.
 	 */
 	public function get_available_widgets() {
-		return $this->available_widgets;
+		$widgets = $this->available_widgets;
+		
+		// Sort widgets alphabetically by title
+		uasort( $widgets, function( $a, $b ) {
+			return strcmp( $a['title'], $b['title'] );
+		} );
+		
+		return $widgets;
 	}
 
 	/**
