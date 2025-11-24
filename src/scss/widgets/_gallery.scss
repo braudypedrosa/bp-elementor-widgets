@@ -106,18 +106,9 @@
 		cursor: not-allowed;
 	}
 	
-	&::before {
-		font-family: 'eicons';
+	i {
 		font-size: inherit;
 		line-height: 1;
-	}
-	
-	&.slick-prev::before {
-		content: '\e92a';
-	}
-	
-	&.slick-next::before {
-		content: '\e931';
 	}
 }
 

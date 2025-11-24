@@ -345,27 +345,7 @@
 	}
 }
 
-// Elementor Icon Font Support
-@font-face {
-	font-family: 'eicons';
-	src: url('../fonts/eicons.woff2') format('woff2'),
-	     url('../fonts/eicons.woff') format('woff'),
-	     url('../fonts/eicons.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-	font-display: block;
-}
-
-[class^="eicon-"],
-[class*=" eicon-"] {
-	font-family: 'eicons' !important;
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
+// Font Awesome Icon Support
+// Note: Font Awesome is loaded from CDN in the frontend
+// Admin page uses WordPress dashicons or Font Awesome if needed
 

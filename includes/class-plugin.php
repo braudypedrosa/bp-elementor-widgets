@@ -159,6 +159,14 @@ final class Plugin {
 	 * @return void
 	 */
 	public function enqueue_frontend_styles() {
+		// Enqueue Font Awesome.
+		wp_enqueue_style(
+			'font-awesome',
+			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+			array(),
+			'6.5.1'
+		);
+
 		// Enqueue Slick Carousel CSS.
 		wp_enqueue_style(
 			'slick-carousel',
@@ -177,7 +185,7 @@ final class Plugin {
 		wp_enqueue_style(
 			'bp-elementor-widgets',
 			BP_ELEMENTOR_WIDGETS_URL . 'dist/css/frontend.min.css',
-			array( 'slick-carousel', 'slick-carousel-theme' ),
+			array( 'font-awesome', 'slick-carousel', 'slick-carousel-theme' ),
 			BP_ELEMENTOR_WIDGETS_VERSION
 		);
 	}
