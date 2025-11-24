@@ -73,12 +73,29 @@ In `includes/class-widgets-manager.php`:
 ),
 ```
 
-### 5. Build
+### 5. Add Widget JavaScript (if needed)
+In `src/js/widgets.js`, add your widget handler:
+```javascript
+// Register in registerWidgets()
+elementorFrontend.hooks.addAction(
+    'frontend/element_ready/bp-your-widget.default',
+    BpWidgets.YourWidget.init
+);
+
+// Add handler
+BpWidgets.YourWidget = {
+    init: function($scope) {
+        // Your widget JS here
+    }
+};
+```
+
+### 6. Build
 ```bash
 npm run build
 ```
 
-### 6. Test in Elementor
+### 7. Test in Elementor
 The widget will appear in the "BP Widgets" category.
 
 ## 🎨 Using SCSS Variables
