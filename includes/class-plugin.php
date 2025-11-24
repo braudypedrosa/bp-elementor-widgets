@@ -136,11 +136,11 @@ final class Plugin {
 	 * @return void
 	 */
 	private function register_hooks() {
-		// Register widget styles.
-		add_action( 'elementor/frontend/after_enqueue_styles', array( $this, 'enqueue_frontend_styles' ) );
+		// Register widget styles on wp_enqueue_scripts to ensure Font Awesome loads.
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_styles' ), 10 );
 
 		// Register widget scripts.
-		add_action( 'elementor/frontend/after_register_scripts', array( $this, 'enqueue_frontend_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_scripts' ), 10 );
 
 		// Register editor scripts.
 		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'enqueue_editor_scripts' ) );
