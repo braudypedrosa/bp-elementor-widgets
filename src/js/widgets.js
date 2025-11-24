@@ -54,14 +54,20 @@
 				BpWidgets.InfoBox.init
 			);
 
-			// Countdown Timer Widget
-			elementorFrontend.hooks.addAction(
-				'frontend/element_ready/bp-countdown-timer.default',
-				BpWidgets.CountdownTimer.init
-			);
+		// Countdown Timer Widget
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/bp-countdown-timer.default',
+			BpWidgets.CountdownTimer.init
+		);
 
-			// Add more widget handlers here as you create them
-		}
+		// Gallery Widget
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/bp-gallery.default',
+			BpWidgets.Gallery.init
+		);
+
+		// Add more widget handlers here as you create them
+	}
 	};
 
 	/**
@@ -271,6 +277,81 @@
 
 			// Trigger custom event
 			$timer.trigger('bpCountdownFinished');
+		}
+	};
+
+	/**
+	 * Gallery Widget Handler
+	 *
+	 * @since 1.0.0
+	 */
+	BpWidgets.Gallery = {
+
+		/**
+		 * Initialize Gallery
+		 *
+		 * @since 1.0.0
+		 * @param {jQuery} $scope The widget wrapper element.
+		 * @return {void}
+		 */
+		init: function ($scope) {
+			const $gallery = $scope.find('.bp-gallery');
+			const $thumbnails = $scope.find('.bp-gallery-thumbnails');
+
+			if (!$gallery.length) {
+				return;
+			}
+
+			// Get Slick settings from data attribute
+			const slickSettings = $gallery.data('slick');
+			const hasLightbox = $gallery.parent().data('lightbox') === 'yes';
+
+			// Default settings
+			const defaultSettings = {
+				prevArrow: '<button type="button" class="slick-prev bp-gallery-arrow"></button>',
+				nextArrow: '<button type="button" class="slick-next bp-gallery-arrow"></button>',
+				responsive: [
+					{
+						breakpoint: 768,
+						settings: {
+							slidesToShow: Math.min(slickSettings.slidesToShow, 2),
+							slidesToScroll: 1,
+							arrows: true,
+						}
+					},
+					{
+						breakpoint: 480,
+						settings: {
+							slidesToShow: 1,
+							slidesToScroll: 1,
+							arrows: true,
+							dots: false,
+						}
+					}
+				]
+			};
+
+			// Merge settings
+			const finalSettings = $.extend({}, defaultSettings, slickSettings);
+
+			// Initialize main gallery
+			if ($thumbnails.length) {
+				// Gallery with thumbnail navigation
+				finalSettings.asNavFor = '.bp-gallery-thumbnails';
+				$gallery.slick(finalSettings);
+
+				// Initialize thumbnails
+				$thumbnails.slick();
+			} else {
+				// Gallery without thumbnails
+				$gallery.slick(finalSettings);
+			}
+
+			// Handle lightbox (Elementor handles it automatically)
+			if (hasLightbox) {
+				// Elementor's lightbox will be automatically triggered
+				// No additional code needed
+			}
 		}
 	};
 

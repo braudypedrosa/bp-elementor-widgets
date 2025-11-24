@@ -87,6 +87,14 @@ class Widgets_Manager {
 				'icon'        => 'eicon-countdown',
 				'is_pro'      => false,
 			),
+			'gallery' => array(
+				'title'       => esc_html__( 'Gallery Carousel', 'bp-elementor-widgets' ),
+				'description' => esc_html__( 'Create beautiful image galleries with Slick Carousel and lightbox.', 'bp-elementor-widgets' ),
+				'class'       => 'Gallery',
+				'file'        => 'gallery.php',
+				'icon'        => 'eicon-gallery-grid',
+				'is_pro'      => false,
+			),
 			// Add more widgets here as you build them:
 			// 'pricing-table' => array(
 			//     'title'       => esc_html__( 'Pricing Table', 'bp-elementor-widgets' ),
