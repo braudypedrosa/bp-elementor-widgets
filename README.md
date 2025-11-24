@@ -92,14 +92,24 @@ Add your custom styles to `assets/css/frontend.css`
 
 ### 4. Add Widget JavaScript (Optional)
 
-Add your custom JavaScript to `assets/js/frontend.js` and register the handler:
+Add your widget handler to `src/js/widgets.js`:
 
 ```javascript
+// In registerWidgets() method:
 elementorFrontend.hooks.addAction(
     'frontend/element_ready/bp-your-widget.default',
-    YourWidgetHandler
+    BpWidgets.YourWidget.init
 );
+
+// Add handler object:
+BpWidgets.YourWidget = {
+    init: function($scope) {
+        // Your widget JavaScript here
+    }
+};
 ```
+
+All widget-specific JavaScript is consolidated in `widgets.js` for better organization.
 
 ## File Structure
 

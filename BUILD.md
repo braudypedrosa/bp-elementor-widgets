@@ -197,9 +197,36 @@ npm run deploy
 
 JavaScript files are minified but not compiled (no Babel/Webpack).
 
+### File Structure:
+- `src/js/frontend.js` - General frontend utilities
+- `src/js/widgets.js` - **All widget-specific code** (consolidated)
+- `src/js/admin.js` - Admin settings page
+- `src/js/editor.js` - Elementor editor enhancements
+
+### Adding Widget JavaScript:
+
+Add your widget handler to `src/js/widgets.js`:
+
+```javascript
+// 1. Register in registerWidgets()
+elementorFrontend.hooks.addAction(
+    'frontend/element_ready/bp-your-widget.default',
+    BpWidgets.YourWidget.init
+);
+
+// 2. Add handler object
+BpWidgets.YourWidget = {
+    init: function($scope) {
+        const $widget = $scope.find('.bp-your-widget');
+        // Your widget code here
+    }
+};
+```
+
 **Best practices:**
 - Write ES5-compatible code
 - OR use ES6 features supported by target browsers
+- Keep all widget code in `widgets.js` (don't create separate files)
 - Test in multiple browsers
 
 ## Troubleshooting

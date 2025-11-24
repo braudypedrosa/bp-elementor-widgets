@@ -185,10 +185,10 @@ final class Plugin {
 			true
 		);
 
-		// Register countdown timer script.
+		// Register combined widgets script.
 		wp_register_script(
-			'bp-countdown-timer',
-			BP_ELEMENTOR_WIDGETS_URL . 'dist/js/countdown-timer.min.js',
+			'bp-elementor-widgets-widgets',
+			BP_ELEMENTOR_WIDGETS_URL . 'dist/js/widgets.min.js',
 			array( 'jquery', 'elementor-frontend' ),
 			BP_ELEMENTOR_WIDGETS_VERSION,
 			true

@@ -66,7 +66,7 @@ abstract class Base_Widget extends Widget_Base {
 	 * @return array Script handles.
 	 */
 	public function get_script_depends() {
-		return array( 'bp-elementor-widgets' );
+		return array( 'bp-elementor-widgets-widgets' );
 	}
 
 	/**
