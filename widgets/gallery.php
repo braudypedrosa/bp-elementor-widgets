@@ -196,16 +196,17 @@ class Gallery extends Base_Widget {
 		);
 
 		$this->add_control(
-			'thumbnail_size',
+			'thumbnails_per_slide',
 			array(
-				'label'     => esc_html__( 'Thumbnail Size', 'bp-elementor-widgets' ),
+				'label'     => esc_html__( 'Thumbnails Per Slide', 'bp-elementor-widgets' ),
 				'type'      => Controls_Manager::SELECT,
-				'default'   => 'medium',
+				'default'   => '7',
 				'options'   => array(
-					'small'  => esc_html__( 'Small (8 per slide)', 'bp-elementor-widgets' ),
-					'medium' => esc_html__( 'Medium (7 per slide)', 'bp-elementor-widgets' ),
-					'large'  => esc_html__( 'Large (6 per slide)', 'bp-elementor-widgets' ),
+					'8' => esc_html__( '8 (Small)', 'bp-elementor-widgets' ),
+					'7' => esc_html__( '7 (Medium)', 'bp-elementor-widgets' ),
+					'6' => esc_html__( '6 (Large)', 'bp-elementor-widgets' ),
 				),
+				'separator' => 'before',
 				'condition' => array(
 					'gallery_layout' => 'thumbnail',
 				),
@@ -718,9 +719,16 @@ class Gallery extends Base_Widget {
 			$this->add_render_attribute( 'wrapper', 'data-lightbox', 'yes' );
 		}
 
-		// Add thumbnail size data attribute for JavaScript.
+		// Add thumbnails per slide data attribute for JavaScript.
 		if ( 'thumbnail' === $settings['gallery_layout'] ) {
-			$thumb_size = isset( $settings['thumbnail_size'] ) ? $settings['thumbnail_size'] : 'medium';
+			$thumbs_per_slide = isset( $settings['thumbnails_per_slide'] ) ? $settings['thumbnails_per_slide'] : '7';
+			// Convert to size for CSS styling
+			$size_map = array(
+				'8' => 'small',
+				'7' => 'medium',
+				'6' => 'large',
+			);
+			$thumb_size = isset( $size_map[ $thumbs_per_slide ] ) ? $size_map[ $thumbs_per_slide ] : 'medium';
 			$this->add_render_attribute( 'wrapper', 'data-thumbnail-size', $thumb_size );
 		}
 		?>
@@ -756,15 +764,18 @@ class Gallery extends Base_Widget {
 			</div>
 
 			<?php if ( 'thumbnail' === $settings['gallery_layout'] ) : 
-				$thumb_size = isset( $settings['thumbnail_size'] ) ? $settings['thumbnail_size'] : 'medium';
-				$slides_map = array(
-					'small'  => 8,
-					'medium' => 7,
-					'large'  => 6,
+				$thumbs_per_slide = isset( $settings['thumbnails_per_slide'] ) ? $settings['thumbnails_per_slide'] : '7';
+				$slides_to_show = absint( $thumbs_per_slide );
+				
+				// Convert to size for CSS class
+				$size_map = array(
+					'8' => 'small',
+					'7' => 'medium',
+					'6' => 'large',
 				);
-				$slides_to_show = isset( $slides_map[ $thumb_size ] ) ? $slides_map[ $thumb_size ] : 7;
+				$thumb_size = isset( $size_map[ $thumbs_per_slide ] ) ? $size_map[ $thumbs_per_slide ] : 'medium';
 				?>
-				<div class="bp-gallery-thumbnails bp-gallery-thumbnails-<?php echo esc_attr( $thumb_size ); ?>" data-slick='{"slidesToShow": <?php echo absint( $slides_to_show ); ?>, "slidesToScroll": 1, "asNavFor": ".bp-gallery", "focusOnSelect": true, "arrows": false, "dots": false, "centerMode": true, "centerPadding": "0"}'>
+				<div class="bp-gallery-thumbnails bp-gallery-thumbnails-<?php echo esc_attr( $thumb_size ); ?>" data-slick='{"slidesToShow": <?php echo $slides_to_show; ?>, "slidesToScroll": 1, "asNavFor": ".bp-gallery", "focusOnSelect": true, "arrows": false, "dots": false, "centerMode": true, "centerPadding": "0"}'>
 					<?php
 					foreach ( $gallery as $image ) {
 						$thumb_url = wp_get_attachment_image_url( $image['id'], 'thumbnail' );

@@ -302,9 +302,17 @@
 				return;
 			}
 
+			// Destroy existing Slick instances if they exist (for Elementor editor)
+			if ($gallery.hasClass('slick-initialized')) {
+				$gallery.slick('unslick');
+			}
+			if ($thumbnails.length && $thumbnails.hasClass('slick-initialized')) {
+				$thumbnails.slick('unslick');
+			}
+
 			// Get Slick settings from data attribute
 			const slickSettings = $gallery.data('slick');
-			const hasLightbox = $gallery.parent().data('lightbox') === 'yes';
+			const hasLightbox = $gallery.data('lightbox') === 'yes';
 
 			// Default settings
 			const defaultSettings = {
@@ -340,8 +348,15 @@
 				finalSettings.asNavFor = '.bp-gallery-thumbnails';
 				$gallery.slick(finalSettings);
 
-				// Initialize thumbnails
-				$thumbnails.slick();
+				// Get thumbnail settings from data attribute
+				const thumbSettings = $thumbnails.data('slick');
+				
+				// Initialize thumbnails with their own settings
+				if (thumbSettings) {
+					$thumbnails.slick(thumbSettings);
+				} else {
+					$thumbnails.slick();
+				}
 			} else {
 				// Gallery without thumbnails
 				$gallery.slick(finalSettings);
