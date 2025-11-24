@@ -135,15 +135,13 @@ class Settings {
 			BP_ELEMENTOR_WIDGETS_VERSION
 		);
 
-		// Enqueue Ionicons for admin.
-		wp_enqueue_script(
-			'ionicons',
-			'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js',
+		// Enqueue Font Awesome for admin.
+		wp_enqueue_style(
+			'font-awesome',
+			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
 			array(),
-			'7.1.0',
-			true
+			'6.5.1'
 		);
-		wp_script_add_data( 'ionicons', 'type', 'module' );
 
 		// Enqueue admin scripts.
 		wp_enqueue_script(
@@ -254,22 +252,22 @@ class Settings {
 						foreach ( $available_widgets as $widget_key => $widget_data ) {
 							$is_enabled = in_array( $widget_key, $enabled_widgets, true );
 							
-							// Map Elementor icons to Ionicons.
+							// Map Elementor icons to Font Awesome.
 							$icon_map = array(
-								'eicon-info-box'     => 'information-circle',
-								'eicon-countdown'    => 'time',
-								'eicon-gallery-grid' => 'images',
-								'eicon-price-table'  => 'receipt',
-								'eicon-plug'         => 'extension-puzzle',
+								'eicon-info-box'     => 'fa-solid fa-circle-info',
+								'eicon-countdown'    => 'fa-solid fa-clock',
+								'eicon-gallery-grid' => 'fa-solid fa-images',
+								'eicon-price-table'  => 'fa-solid fa-table',
+								'eicon-plug'         => 'fa-solid fa-plug',
 							);
 							
 							$eicon = isset( $widget_data['icon'] ) ? $widget_data['icon'] : 'eicon-plug';
-							$icon = isset( $icon_map[ $eicon ] ) ? $icon_map[ $eicon ] : 'cube';
+							$icon = isset( $icon_map[ $eicon ] ) ? $icon_map[ $eicon ] : 'fa-solid fa-puzzle-piece';
 							?>
 							<div class="bp-widget-card <?php echo $is_enabled ? 'active' : ''; ?>" data-widget="<?php echo esc_attr( $widget_key ); ?>">
 								<div class="bp-widget-header">
 									<div class="bp-widget-icon">
-										<ion-icon name="<?php echo esc_attr( $icon ); ?>"></ion-icon>
+										<i class="<?php echo esc_attr( $icon ); ?>"></i>
 									</div>
 									<div class="bp-widget-toggle">
 										<label class="bp-switch">
