@@ -232,14 +232,17 @@ class Testimonial extends Base_Widget {
 		$this->add_responsive_control(
 			'columns',
 			array(
-				'label'   => esc_html__( 'Columns', 'bp-elementor-widgets' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => '3',
-				'options' => array(
+				'label'     => esc_html__( 'Columns', 'bp-elementor-widgets' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '3',
+				'options'   => array(
 					'1' => '1',
 					'2' => '2',
 					'3' => '3',
 					'4' => '4',
+				),
+				'condition' => array(
+					'layout' => 'grid',
 				),
 			)
 		);
