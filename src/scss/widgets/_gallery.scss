@@ -81,46 +81,64 @@
 	}
 }
 
-// Navigation Arrows
+// Navigation Arrows - Clean Font Awesome Implementation
 .bp-gallery-arrow {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	z-index: 10;
-	cursor: pointer;
+	// Reset all Slick default styles
+	position: absolute !important;
+	top: 50% !important;
+	transform: translateY(-50%) !important;
+	z-index: 10 !important;
+	width: 50px !important;
+	height: 50px !important;
+	padding: 0 !important;
+	cursor: pointer !important;
+	border: none !important;
+	outline: none !important;
+	background: rgba(0, 0, 0, 0.5) !important;
+	border-radius: 4px !important;
 	@include flex-center;
 	@include transition(all);
-	border: none;
-	outline: none;
-	font-size: 0; // Hide default Slick text
-	line-height: 0;
 	
+	// Position
 	&.slick-prev {
-		left: 20px;
+		left: 20px !important;
 	}
 	
 	&.slick-next {
-		right: 20px;
+		right: 20px !important;
+	}
+	
+	// States
+	&:hover {
+		background: rgba(0, 0, 0, 0.8) !important;
 	}
 	
 	&.slick-disabled {
-		opacity: 0.3;
-		cursor: not-allowed;
+		opacity: 0.3 !important;
+		cursor: not-allowed !important;
 	}
 	
-	// Hide default Slick arrow content
-	&::before {
+	// Completely remove any Slick pseudo-elements
+	&::before,
+	&::after {
 		display: none !important;
 		content: none !important;
+		font-size: 0 !important;
+		line-height: 0 !important;
 	}
 	
+	// Font Awesome icon styling
 	i {
-		font-size: 24px; // Set explicit size for Font Awesome icon
-		line-height: 1;
-		display: block;
-		font-family: "Font Awesome 6 Free";
-		font-weight: 900; // Required for 'fas' (solid) icons
-		font-style: normal;
+		font-family: "Font Awesome 6 Free" !important;
+		font-weight: 900 !important; // Required for 'fas' solid icons
+		font-style: normal !important;
+		font-size: 24px !important;
+		line-height: 1 !important;
+		display: block !important;
+		color: #ffffff !important;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-rendering: auto;
 	}
 }
 
@@ -265,16 +283,16 @@
 		width: 40px !important;
 		height: 40px !important;
 		
-		i {
-			font-size: 18px !important;
-		}
-		
 		&.slick-prev {
-			left: 10px;
+			left: 10px !important;
 		}
 		
 		&.slick-next {
-			right: 10px;
+			right: 10px !important;
+		}
+		
+		i {
+			font-size: 18px !important;
 		}
 	}
 	
@@ -296,16 +314,16 @@
 		width: 35px !important;
 		height: 35px !important;
 		
-		i {
-			font-size: 16px !important;
-		}
-		
 		&.slick-prev {
-			left: 5px;
+			left: 5px !important;
 		}
 		
 		&.slick-next {
-			right: 5px;
+			right: 5px !important;
+		}
+		
+		i {
+			font-size: 16px !important;
 		}
 	}
 	

@@ -170,7 +170,7 @@ final class Plugin {
 		wp_style_add_data( 'font-awesome', 'crossorigin', 'anonymous' );
 		wp_style_add_data( 'font-awesome', 'integrity', 'sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==' );
 
-		// Enqueue Slick Carousel CSS.
+		// Enqueue Slick Carousel CSS (base only, no theme).
 		wp_enqueue_style(
 			'slick-carousel',
 			'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css',
@@ -178,17 +178,12 @@ final class Plugin {
 			'1.8.1'
 		);
 
-		wp_enqueue_style(
-			'slick-carousel-theme',
-			'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css',
-			array( 'slick-carousel' ),
-			'1.8.1'
-		);
+		// Note: NOT loading slick-theme.css - we use custom arrows with Font Awesome.
 
 		wp_enqueue_style(
 			'bp-elementor-widgets',
 			BP_ELEMENTOR_WIDGETS_URL . 'dist/css/frontend.min.css',
-			array( 'font-awesome', 'slick-carousel', 'slick-carousel-theme' ),
+			array( 'font-awesome', 'slick-carousel' ),
 			BP_ELEMENTOR_WIDGETS_VERSION
 		);
 	}
