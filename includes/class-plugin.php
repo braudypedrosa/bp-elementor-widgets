@@ -159,13 +159,16 @@ final class Plugin {
 	 * @return void
 	 */
 	public function enqueue_frontend_styles() {
-		// Enqueue Font Awesome.
+		// Enqueue Font Awesome - load early with high priority.
 		wp_enqueue_style(
 			'font-awesome',
 			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
 			array(),
 			'6.5.1'
 		);
+		
+		wp_style_add_data( 'font-awesome', 'crossorigin', 'anonymous' );
+		wp_style_add_data( 'font-awesome', 'integrity', 'sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==' );
 
 		// Enqueue Slick Carousel CSS.
 		wp_enqueue_style(

@@ -142,6 +142,9 @@ class Settings {
 			array(),
 			'6.5.1'
 		);
+		
+		wp_style_add_data( 'font-awesome', 'crossorigin', 'anonymous' );
+		wp_style_add_data( 'font-awesome', 'integrity', 'sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==' );
 
 		// Enqueue admin scripts.
 		wp_enqueue_script(
