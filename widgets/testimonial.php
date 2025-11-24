@@ -326,6 +326,30 @@ class Testimonial extends Base_Widget {
 			)
 		);
 
+		$this->add_responsive_control(
+			'gap',
+			array(
+				'label'      => esc_html__( 'Gap Between Cards', 'bp-elementor-widgets' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'default'    => array(
+					'unit' => 'px',
+					'size' => 20,
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .bp-testimonial-grid' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bp-testimonial-slider .slick-list' => 'margin: 0 -{{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bp-testimonial-slider .slick-slide > div' => 'padding: 0 {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
 		$this->end_controls_section();
 	}
 
