@@ -314,59 +314,66 @@
 			const slickSettings = $gallery.data('slick');
 			const hasLightbox = $gallery.data('lightbox') === 'yes';
 
-			// Default settings
-			const defaultSettings = {
-				prevArrow: '<button type="button" class="slick-prev bp-gallery-arrow"><i class="fa-solid fa-chevron-left"></i></button>',
-				nextArrow: '<button type="button" class="slick-next bp-gallery-arrow"><i class="fa-solid fa-chevron-right"></i></button>',
-				responsive: [
-					{
-						breakpoint: 768,
-						settings: {
-							slidesToShow: Math.min(slickSettings.slidesToShow, 2),
-							slidesToScroll: 1,
-							arrows: true,
+			// Wait a brief moment for DOM to settle after unslick
+			setTimeout(function() {
+				// Default settings
+				const defaultSettings = {
+					prevArrow: '<button type="button" class="slick-prev bp-gallery-arrow"><i class="fa-solid fa-chevron-left"></i></button>',
+					nextArrow: '<button type="button" class="slick-next bp-gallery-arrow"><i class="fa-solid fa-chevron-right"></i></button>',
+					responsive: [
+						{
+							breakpoint: 768,
+							settings: {
+								slidesToShow: Math.min(slickSettings.slidesToShow, 2),
+								slidesToScroll: 1,
+								arrows: true,
+							}
+						},
+						{
+							breakpoint: 480,
+							settings: {
+								slidesToShow: 1,
+								slidesToScroll: 1,
+								arrows: true,
+								dots: false,
+							}
 						}
-					},
-					{
-						breakpoint: 480,
-						settings: {
-							slidesToShow: 1,
-							slidesToScroll: 1,
-							arrows: true,
-							dots: false,
-						}
-					}
-				]
-			};
+					]
+				};
 
-			// Merge settings
-			const finalSettings = $.extend({}, defaultSettings, slickSettings);
+				// Merge settings
+				const finalSettings = $.extend({}, defaultSettings, slickSettings);
 
-			// Initialize main gallery
-			if ($thumbnails.length) {
-				// Gallery with thumbnail navigation
-				finalSettings.asNavFor = '.bp-gallery-thumbnails';
-				$gallery.slick(finalSettings);
-
-				// Get thumbnail settings from data attribute
-				const thumbSettings = $thumbnails.data('slick');
-				
-				// Initialize thumbnails with their own settings
-				if (thumbSettings) {
-					$thumbnails.slick(thumbSettings);
+				// Initialize main gallery
+				if ($thumbnails.length) {
+					// Gallery with thumbnail navigation
+					// Use specific selector within this widget scope
+					finalSettings.asNavFor = $thumbnails;
+					
+					// Get thumbnail settings from data attribute
+					const thumbSettings = $thumbnails.data('slick');
+					
+					// Prepare thumbnail settings
+					const thumbFinalSettings = thumbSettings ? $.extend({}, thumbSettings, {
+						asNavFor: $gallery
+					}) : {
+						asNavFor: $gallery
+					};
+					
+					// Initialize both carousels
+					$gallery.slick(finalSettings);
+					$thumbnails.slick(thumbFinalSettings);
 				} else {
-					$thumbnails.slick();
+					// Gallery without thumbnails
+					$gallery.slick(finalSettings);
 				}
-			} else {
-				// Gallery without thumbnails
-				$gallery.slick(finalSettings);
-			}
 
-			// Handle lightbox (Elementor handles it automatically)
-			if (hasLightbox) {
-				// Elementor's lightbox will be automatically triggered
-				// No additional code needed
-			}
+				// Handle lightbox (Elementor handles it automatically)
+				if (hasLightbox) {
+					// Elementor's lightbox will be automatically triggered
+					// No additional code needed
+				}
+			}, 100);
 		}
 	};
 
