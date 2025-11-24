@@ -96,11 +96,6 @@
 	@include transition(all);
 	opacity: 0.7;
 
-	&:hover {
-		transform: translateY(-3px);
-		@include box-shadow(3);
-	}
-
 	&.active {
 		border-color: $color-secondary;
 		opacity: 1;
@@ -135,12 +130,6 @@
 	border-radius: $border-radius-md;
 	color: #ffffff;
 	font-size: $font-size-xlarge;
-	@include transition(all);
-
-	.bp-widget-card.active & {
-		transform: scale(1.05);
-		box-shadow: 0 4px 15px rgba($color-secondary, 0.3);
-	}
 }
 
 // Widget Toggle Switch
@@ -240,11 +229,6 @@
 	&::after {
 		content: ' →';
 		display: inline-block;
-		@include transition(transform);
-	}
-
-	&:hover::after {
-		transform: translateX(3px);
 	}
 }
 
@@ -266,15 +250,6 @@
 	border: none !important;
 	box-shadow: 0 4px 15px rgba($color-secondary, 0.3) !important;
 	transition: all $transition-base !important;
-
-	&:hover {
-		transform: translateY(-2px) !important;
-		box-shadow: 0 6px 20px rgba($color-secondary, 0.4) !important;
-	}
-
-	&:active {
-		transform: translateY(0) !important;
-	}
 
 	&.loading {
 		opacity: 0.6;

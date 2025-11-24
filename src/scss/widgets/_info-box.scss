@@ -15,11 +15,6 @@
 	padding: $spacing-xl;
 	@include transition(all);
 
-	&:hover {
-		transform: translateY(-5px);
-		@include box-shadow(4);
-	}
-
 	// Icon Position: Top (default)
 	&.bp-icon-position-top {
 		align-items: center;
@@ -70,20 +65,12 @@
 	i {
 		font-size: 50px;
 		color: $color-primary;
-		@include transition(all);
 	}
 
 	svg {
 		width: 50px;
 		height: 50px;
 		fill: $color-primary;
-		@include transition(all);
-	}
-
-	.bp-info-box:hover & {
-		i, svg {
-			transform: scale(1.1);
-		}
 	}
 }
 
@@ -134,8 +121,6 @@
 
 	&:hover {
 		background-color: $color-primary-dark;
-		transform: translateY(-2px);
-		box-shadow: 0 4px 15px rgba($color-primary, 0.3);
 	}
 }
 

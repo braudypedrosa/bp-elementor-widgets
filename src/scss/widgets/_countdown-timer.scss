@@ -31,11 +31,6 @@
 		background-color: $color-bg-light;
 		border: 2px solid $color-border-light;
 		border-radius: $border-radius-sm;
-
-		&:hover {
-			transform: translateY(-3px);
-			@include box-shadow(3);
-		}
 	}
 }
 
@@ -45,10 +40,6 @@
 		background: transparent;
 		border: none;
 		padding: $spacing-sm $spacing-md;
-
-		&:hover {
-			opacity: 0.8;
-		}
 	}
 }
 
