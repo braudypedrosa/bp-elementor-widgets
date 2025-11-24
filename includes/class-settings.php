@@ -249,6 +249,7 @@ class Settings {
 								'eicon-info-box'     => 'dashicons-info',
 								'eicon-countdown'    => 'dashicons-clock',
 								'eicon-gallery-grid' => 'dashicons-images-alt2',
+								'eicon-accordion'    => 'dashicons-arrow-down-alt2',
 								'eicon-testimonial'  => 'dashicons-format-quote',
 								'eicon-price-table'  => 'dashicons-table-col-after',
 								'eicon-plug'         => 'dashicons-admin-plugins',

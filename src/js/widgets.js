@@ -68,6 +68,14 @@
 			);
 		}
 
+		// Read More Widget
+		if (window.BpWidgets.ReadMore) {
+			elementorFrontend.hooks.addAction(
+				'frontend/element_ready/bp-read-more.default',
+				window.BpWidgets.ReadMore.init
+			);
+		}
+
 		// Testimonial Widget
 		if (window.BpWidgets.Testimonial) {
 			elementorFrontend.hooks.addAction(

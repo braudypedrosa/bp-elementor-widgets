@@ -95,6 +95,14 @@ class Widgets_Manager {
 				'icon'        => 'eicon-gallery-grid',
 				'is_pro'      => false,
 			),
+			'read-more' => array(
+				'title'       => esc_html__( 'Read More', 'bp-elementor-widgets' ),
+				'description' => esc_html__( 'Collapsible content with a toggle button for long text.', 'bp-elementor-widgets' ),
+				'class'       => 'Read_More',
+				'file'        => 'read-more.php',
+				'icon'        => 'eicon-accordion',
+				'is_pro'      => false,
+			),
 			'testimonial' => array(
 				'title'       => esc_html__( 'Testimonial', 'bp-elementor-widgets' ),
 				'description' => esc_html__( 'Display customer testimonials with ratings in slider or grid layout.', 'bp-elementor-widgets' ),

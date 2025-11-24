@@ -1,0 +1,95 @@
+/**
+ * Read More Widget Styles
+ *
+ * @package BP_Elementor_Widgets
+ * @since 1.0.0
+ */
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// Read More Wrapper
+.bp-read-more-wrapper {
+	position: relative;
+	width: 100%;
+}
+
+// Content Wrapper
+.bp-read-more-content-wrapper {
+	position: relative;
+	overflow: hidden;
+}
+
+// Content
+.bp-read-more-content {
+	line-height: 1.8;
+	
+	p {
+		margin-bottom: $spacing-md;
+		
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+// Fade Effect
+.bp-read-more-fade {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 60px;
+	pointer-events: none;
+	z-index: 1;
+}
+
+// Button Wrapper
+.bp-read-more-button-wrapper {
+	margin-top: $spacing-lg;
+}
+
+// Button
+.bp-read-more-button {
+	display: inline-block;
+	padding: 12px 30px;
+	font-size: $font-size-base;
+	font-weight: $font-weight-medium;
+	line-height: 1.5;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: $border-radius-sm;
+	@include transition(all);
+	
+	&:hover {
+		transform: translateY(-2px);
+	}
+	
+	&:active {
+		transform: translateY(0);
+	}
+	
+	&:focus {
+		outline: none;
+		box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+	}
+}
+
+// Expanded State
+.bp-read-more-expanded {
+	.bp-read-more-content-wrapper {
+		overflow: visible;
+	}
+}
+
+// Responsive Styles
+@include mobile {
+	.bp-read-more-button {
+		padding: 10px 24px;
+		font-size: $font-size-small;
+	}
+}
+
