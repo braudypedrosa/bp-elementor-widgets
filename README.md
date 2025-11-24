@@ -23,9 +23,9 @@ BP Elementor Widgets is a modular plugin that provides a collection of powerful,
 
 ## Installation
 
-1. Upload the `bub-elementor-widgets` folder to the `/wp-content/plugins/` directory
+1. Upload the `bp-elementor-widgets` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Go to **BUB Widgets** in the WordPress admin menu to enable/disable widgets
+3. Go to **BP Widgets** in the WordPress admin menu to enable/disable widgets
 4. Start using the widgets in Elementor!
 
 ## Available Widgets
@@ -44,7 +44,7 @@ Display information in a stylish box with icon, title, and description.
 
 ## Settings Page
 
-Access the settings page from **WordPress Admin > BUB Widgets**
+Access the settings page from **WordPress Admin > BP Widgets**
 
 The settings page allows you to:
 - Enable or disable individual widgets
@@ -96,7 +96,7 @@ Add your custom JavaScript to `assets/js/frontend.js` and register the handler:
 
 ```javascript
 elementorFrontend.hooks.addAction(
-    'frontend/element_ready/bub-your-widget.default',
+    'frontend/element_ready/bp-your-widget.default',
     YourWidgetHandler
 );
 ```
@@ -121,7 +121,7 @@ bp-elementor-widgets/
 │   └── class-widgets-manager.php    # Widgets registration manager
 ├── widgets/
 │   └── info-box.php                 # Info Box widget
-├── bub-elementor-widgets.php        # Main plugin file
+├── bp-elementor-widgets.php         # Main plugin file
 └── README.md                        # This file
 ```
 

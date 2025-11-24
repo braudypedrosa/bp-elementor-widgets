@@ -13,7 +13,7 @@
 	/**
 	 * Elementor Editor Handler
 	 *
-	 * Handles editor-specific functionality for BUB widgets.
+	 * Handles editor-specific functionality for BP widgets.
 	 *
 	 * @since 1.0.0
 	 */
@@ -56,22 +56,22 @@
 		/**
 		 * Customize Widget Panel
 		 *
-		 * Customize how BUB widgets appear in the Elementor panel.
+		 * Customize how BP widgets appear in the Elementor panel.
 		 *
 		 * @since 1.0.0
 		 * @return {void}
 		 */
 		customizeWidgetPanel: function () {
-			// Add custom class to BUB widget category
-			elementor.on('panel:init', function () {
-				const $bubCategory = $('.elementor-element-wrapper')
-					.find('[data-category="bub-widgets"]')
-					.closest('.elementor-panel-category');
+		// Add custom class to BP widget category
+		elementor.on('panel:init', function () {
+			const $bpCategory = $('.elementor-element-wrapper')
+				.find('[data-category="bp-widgets"]')
+				.closest('.elementor-panel-category');
 
-				if ($bubCategory.length) {
-					$bubCategory.addClass('bub-widgets-category');
-				}
-			});
+			if ($bpCategory.length) {
+				$bpCategory.addClass('bp-widgets-category');
+			}
+		});
 		},
 
 		/**

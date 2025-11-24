@@ -52,7 +52,7 @@
 			// Click on card to toggle
 			$('.bp-widget-card').on('click', function (e) {
 				// Don't trigger if clicking on the checkbox itself
-				if (!$(e.target).hasClass('bub-widget-checkbox') && 
+				if (!$(e.target).hasClass('bp-widget-checkbox') && 
 				    !$(e.target).closest('.bp-widget-toggle').length &&
 				    !$(e.target).is('a')) {
 					const $checkbox = $(this).find('.bp-widget-checkbox');
@@ -178,7 +178,7 @@
 				url: bpElementorWidgets.ajaxUrl,
 				type: 'POST',
 				data: {
-					action: 'bub_save_widget_settings',
+					action: 'bp_save_widget_settings',
 					nonce: bpElementorWidgets.nonce,
 					enabled_widgets: enabledWidgets
 				},

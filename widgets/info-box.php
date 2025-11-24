@@ -675,7 +675,7 @@ class Info_Box extends Base_Widget {
 		$settings = $this->get_settings_for_display();
 
 		$this->add_render_attribute( 'wrapper', 'class', 'bp-info-box' );
-		$this->add_render_attribute( 'wrapper', 'class', 'bub-icon-position-' . $settings['icon_position'] );
+		$this->add_render_attribute( 'wrapper', 'class', 'bp-icon-position-' . $settings['icon_position'] );
 
 		// If link type is 'box', wrap the entire box in a link.
 		$is_box_link = ! empty( $settings['link']['url'] ) && 'box' === $settings['link_type'];
@@ -741,7 +741,7 @@ class Info_Box extends Base_Widget {
 		?>
 		<#
 		view.addRenderAttribute( 'wrapper', 'class', 'bp-info-box' );
-		view.addRenderAttribute( 'wrapper', 'class', 'bub-icon-position-' + settings.icon_position );
+		view.addRenderAttribute( 'wrapper', 'class', 'bp-icon-position-' + settings.icon_position );
 
 		const isBoxLink = settings.link.url && 'box' === settings.link_type;
 		#>

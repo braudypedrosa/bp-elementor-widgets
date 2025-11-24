@@ -11,7 +11,7 @@
 	'use strict';
 
 	/**
-	 * BUB Elementor Widgets Frontend Handler
+	 * BP Elementor Widgets Frontend Handler
 	 *
 	 * Main object that handles all frontend functionality for the widgets.
 	 *
@@ -45,14 +45,14 @@
 		initWidgets: function () {
 			// Info Box Widget Handler
 			elementorFrontend.hooks.addAction(
-				'frontend/element_ready/bub-info-box.default',
+				'frontend/element_ready/bp-info-box.default',
 				BpElementorWidgets.initInfoBox
 			);
 
 			// Add more widget handlers here as you create them
 			// Example:
 			// elementorFrontend.hooks.addAction(
-			//     'frontend/element_ready/bub-pricing-table.default',
+			//     'frontend/element_ready/bp-pricing-table.default',
 			//     BpElementorWidgets.initPricingTable
 			// );
 		},
@@ -107,8 +107,8 @@
 
 			// Check on scroll
 			const checkAndAnimate = function () {
-				if (isInViewport($element) && !$element.hasClass('bub-animated')) {
-					$element.addClass('bub-animated');
+				if (isInViewport($element) && !$element.hasClass('bp-animated')) {
+					$element.addClass('bp-animated');
 				}
 			};
 

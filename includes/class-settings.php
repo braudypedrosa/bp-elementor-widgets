@@ -36,7 +36,7 @@ class Settings {
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
-		add_action( 'wp_ajax_bub_save_widget_settings', array( $this, 'ajax_save_settings' ) );
+		add_action( 'wp_ajax_bp_save_widget_settings', array( $this, 'ajax_save_settings' ) );
 	}
 
 	/**
@@ -50,7 +50,7 @@ class Settings {
 	 */
 	public function add_admin_menu() {
 		add_menu_page(
-			esc_html__( 'BUB Elementor Widgets', 'bp-elementor-widgets' ),
+			esc_html__( 'BP Elementor Widgets', 'bp-elementor-widgets' ),
 			esc_html__( 'BP Widgets', 'bp-elementor-widgets' ),
 			'manage_options',
 			'bp-elementor-widgets',
@@ -123,7 +123,7 @@ class Settings {
 	 */
 	public function enqueue_admin_assets( $hook ) {
 		// Only load on our settings page.
-		if ( 'toplevel_page_bub-elementor-widgets' !== $hook ) {
+		if ( 'toplevel_page_bp-elementor-widgets' !== $hook ) {
 			return;
 		}
 
@@ -146,11 +146,11 @@ class Settings {
 
 		// Localize script with data.
 		wp_localize_script(
-			'bub-elementor-widgets-admin',
-			'bubElementorWidgets',
+			'bp-elementor-widgets-admin',
+			'bpElementorWidgets',
 			array(
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-				'nonce'   => wp_create_nonce( 'bub_widgets_nonce' ),
+				'nonce'   => wp_create_nonce( 'bp_widgets_nonce' ),
 				'strings' => array(
 					'saved'       => esc_html__( 'Settings saved successfully!', 'bp-elementor-widgets' ),
 					'error'       => esc_html__( 'Error saving settings. Please try again.', 'bp-elementor-widgets' ),
@@ -172,7 +172,7 @@ class Settings {
 	 */
 	public function ajax_save_settings() {
 		// Verify nonce.
-		check_ajax_referer( 'bub_widgets_nonce', 'nonce' );
+		check_ajax_referer( 'bp_widgets_nonce', 'nonce' );
 
 		// Check user capabilities.
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -209,34 +209,34 @@ class Settings {
 		$available_widgets = $widgets_manager->get_available_widgets();
 		$enabled_widgets = get_option( 'bp_elementor_enabled_widgets', array_keys( $available_widgets ) );
 		?>
-		<div class="wrap bub-widgets-settings">
+		<div class="wrap bp-widgets-settings">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 			
-			<div class="bub-settings-container">
+			<div class="bp-settings-container">
 				<!-- Header Section -->
-				<div class="bub-settings-header">
-					<div class="bub-header-content">
+				<div class="bp-settings-header">
+					<div class="bp-header-content">
 						<h2><?php esc_html_e( 'Widget Manager', 'bp-elementor-widgets' ); ?></h2>
 						<p class="description">
 							<?php esc_html_e( 'Enable or disable widgets to optimize your site performance. Only enabled widgets will be loaded.', 'bp-elementor-widgets' ); ?>
 						</p>
 					</div>
-					<div class="bub-header-actions">
-						<button type="button" class="button bub-toggle-all" data-action="enable">
+					<div class="bp-header-actions">
+						<button type="button" class="button bp-toggle-all" data-action="enable">
 							<?php esc_html_e( 'Enable All', 'bp-elementor-widgets' ); ?>
 						</button>
-						<button type="button" class="button bub-toggle-all" data-action="disable">
+						<button type="button" class="button bp-toggle-all" data-action="disable">
 							<?php esc_html_e( 'Disable All', 'bp-elementor-widgets' ); ?>
 						</button>
 					</div>
 				</div>
 
 				<!-- Widgets Grid -->
-				<div class="bub-widgets-grid">
+				<div class="bp-widgets-grid">
 					<?php
 					if ( empty( $available_widgets ) ) {
 						?>
-						<div class="bub-no-widgets">
+						<div class="bp-no-widgets">
 							<p><?php esc_html_e( 'No widgets available yet.', 'bp-elementor-widgets' ); ?></p>
 						</div>
 						<?php
@@ -245,31 +245,31 @@ class Settings {
 							$is_enabled = in_array( $widget_key, $enabled_widgets, true );
 							$icon = isset( $widget_data['icon'] ) ? $widget_data['icon'] : 'eicon-plug';
 							?>
-							<div class="bub-widget-card <?php echo $is_enabled ? 'active' : ''; ?>" data-widget="<?php echo esc_attr( $widget_key ); ?>">
-								<div class="bub-widget-header">
-									<div class="bub-widget-icon">
+							<div class="bp-widget-card <?php echo $is_enabled ? 'active' : ''; ?>" data-widget="<?php echo esc_attr( $widget_key ); ?>">
+								<div class="bp-widget-header">
+									<div class="bp-widget-icon">
 										<i class="<?php echo esc_attr( $icon ); ?>"></i>
 									</div>
-									<div class="bub-widget-toggle">
-										<label class="bub-switch">
+									<div class="bp-widget-toggle">
+										<label class="bp-switch">
 											<input 
 												type="checkbox" 
-												class="bub-widget-checkbox" 
+												class="bp-widget-checkbox" 
 												name="enabled_widgets[]" 
 												value="<?php echo esc_attr( $widget_key ); ?>"
 												<?php checked( $is_enabled ); ?>
 											>
-											<span class="bub-slider"></span>
+											<span class="bp-slider"></span>
 										</label>
 									</div>
 								</div>
-								<div class="bub-widget-body">
-									<h3 class="bub-widget-title"><?php echo esc_html( $widget_data['title'] ); ?></h3>
-									<p class="bub-widget-description"><?php echo esc_html( $widget_data['description'] ); ?></p>
+								<div class="bp-widget-body">
+									<h3 class="bp-widget-title"><?php echo esc_html( $widget_data['title'] ); ?></h3>
+									<p class="bp-widget-description"><?php echo esc_html( $widget_data['description'] ); ?></p>
 								</div>
 								<?php if ( isset( $widget_data['demo_url'] ) && ! empty( $widget_data['demo_url'] ) ) : ?>
-									<div class="bub-widget-footer">
-										<a href="<?php echo esc_url( $widget_data['demo_url'] ); ?>" target="_blank" class="bub-demo-link">
+									<div class="bp-widget-footer">
+										<a href="<?php echo esc_url( $widget_data['demo_url'] ); ?>" target="_blank" class="bp-demo-link">
 											<?php esc_html_e( 'View Demo', 'bp-elementor-widgets' ); ?>
 										</a>
 									</div>
@@ -282,11 +282,11 @@ class Settings {
 				</div>
 
 				<!-- Save Button -->
-				<div class="bub-settings-footer">
-					<button type="button" class="button button-primary button-large bub-save-settings">
+				<div class="bp-settings-footer">
+					<button type="button" class="button button-primary button-large bp-save-settings">
 						<?php esc_html_e( 'Save Changes', 'bp-elementor-widgets' ); ?>
 					</button>
-					<span class="bub-save-status"></span>
+					<span class="bp-save-status"></span>
 				</div>
 			</div>
 		</div>
