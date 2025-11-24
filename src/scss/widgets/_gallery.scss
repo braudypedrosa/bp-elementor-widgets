@@ -118,6 +118,9 @@
 		font-size: 24px; // Set explicit size for Font Awesome icon
 		line-height: 1;
 		display: block;
+		font-family: "Font Awesome 6 Free";
+		font-weight: 900; // Required for 'fas' (solid) icons
+		font-style: normal;
 	}
 }
 
