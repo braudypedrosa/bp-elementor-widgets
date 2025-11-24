@@ -12,7 +12,6 @@
 .bp-testimonial-wrapper {
 	position: relative;
 	width: 100%;
-	overflow: hidden;
 }
 
 // Testimonial Item (Card)
@@ -167,12 +166,17 @@
 		visibility: hidden;
 	}
 
+	.slick-list {
+		padding: 0 !important;
+	}
+
 	.slick-slide {
 		outline: none;
 		height: inherit;
 
 		> div {
 			height: 100%;
+			display: flex;
 		}
 	}
 
@@ -181,11 +185,12 @@
 		align-items: stretch;
 	}
 
-	// Make sure items take full height
+	// Make sure items take full height and proper spacing
 	.bp-testimonial-item {
 		display: flex;
 		flex-direction: column;
 		height: 100%;
+		flex: 1;
 	}
 }
 

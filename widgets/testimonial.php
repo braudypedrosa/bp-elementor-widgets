@@ -344,8 +344,7 @@ class Testimonial extends Base_Widget {
 				),
 				'selectors'  => array(
 					'{{WRAPPER}} .bp-testimonial-grid' => 'gap: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .bp-testimonial-slider .slick-list' => 'margin: 0 -{{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .bp-testimonial-slider .slick-slide > div' => 'padding: 0 {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .bp-testimonial-slider .bp-testimonial-item' => 'margin: 0 calc({{SIZE}}{{UNIT}} / 2);',
 				),
 			)
 		);
