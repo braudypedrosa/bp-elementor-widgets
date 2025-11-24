@@ -4,11 +4,11 @@
  *
  * The main class that initiates and runs the plugin.
  *
- * @package BUB_Elementor_Widgets
+ * @package BP_Elementor_Widgets
  * @since 1.0.0
  */
 
-namespace BUB_Elementor_Widgets;
+namespace BP_Elementor_Widgets;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -100,13 +100,13 @@ final class Plugin {
 	 */
 	private function load_dependencies() {
 		// Load the widgets manager.
-		require_once BUB_ELEMENTOR_WIDGETS_PATH . 'includes/class-widgets-manager.php';
+		require_once BP_ELEMENTOR_WIDGETS_PATH . 'includes/class-widgets-manager.php';
 
 		// Load the settings class.
-		require_once BUB_ELEMENTOR_WIDGETS_PATH . 'includes/class-settings.php';
+		require_once BP_ELEMENTOR_WIDGETS_PATH . 'includes/class-settings.php';
 
 		// Load the abstract widget class.
-		require_once BUB_ELEMENTOR_WIDGETS_PATH . 'includes/abstracts/class-base-widget.php';
+		require_once BP_ELEMENTOR_WIDGETS_PATH . 'includes/abstracts/class-base-widget.php';
 	}
 
 	/**
@@ -160,10 +160,10 @@ final class Plugin {
 	 */
 	public function enqueue_frontend_styles() {
 		wp_enqueue_style(
-			'bub-elementor-widgets',
-			BUB_ELEMENTOR_WIDGETS_URL . 'assets/css/frontend.css',
+			'bp-elementor-widgets',
+			BP_ELEMENTOR_WIDGETS_URL . 'assets/css/frontend.css',
 			array(),
-			BUB_ELEMENTOR_WIDGETS_VERSION
+			BP_ELEMENTOR_WIDGETS_VERSION
 		);
 	}
 
@@ -178,10 +178,10 @@ final class Plugin {
 	 */
 	public function enqueue_frontend_scripts() {
 		wp_register_script(
-			'bub-elementor-widgets',
-			BUB_ELEMENTOR_WIDGETS_URL . 'assets/js/frontend.js',
+			'bp-elementor-widgets',
+			BP_ELEMENTOR_WIDGETS_URL . 'assets/js/frontend.js',
 			array( 'jquery' ),
-			BUB_ELEMENTOR_WIDGETS_VERSION,
+			BP_ELEMENTOR_WIDGETS_VERSION,
 			true
 		);
 	}
@@ -198,9 +198,9 @@ final class Plugin {
 	public function enqueue_editor_scripts() {
 		wp_enqueue_script(
 			'bub-elementor-widgets-editor',
-			BUB_ELEMENTOR_WIDGETS_URL . 'assets/js/editor.js',
+			BP_ELEMENTOR_WIDGETS_URL . 'assets/js/editor.js',
 			array( 'jquery' ),
-			BUB_ELEMENTOR_WIDGETS_VERSION,
+			BP_ELEMENTOR_WIDGETS_VERSION,
 			true
 		);
 	}
@@ -217,9 +217,9 @@ final class Plugin {
 	 */
 	public function register_widget_categories( $elements_manager ) {
 		$elements_manager->add_category(
-			'bub-widgets',
+			'bp-widgets',
 			array(
-				'title' => esc_html__( 'BUB Widgets', 'bub-elementor-widgets' ),
+				'title' => esc_html__( 'BP Widgets', 'bp-elementor-widgets' ),
 				'icon'  => 'fa fa-plug',
 			)
 		);

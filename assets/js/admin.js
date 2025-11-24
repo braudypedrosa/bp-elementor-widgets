@@ -1,9 +1,9 @@
 /**
  * Admin JavaScript
  *
- * JavaScript functionality for the BUB Elementor Widgets settings page.
+ * JavaScript functionality for the BP Elementor Widgets settings page.
  *
- * @package BUB_Elementor_Widgets
+ * @package BP_Elementor_Widgets
  * @since 1.0.0
  */
 
@@ -17,7 +17,7 @@
 	 *
 	 * @since 1.0.0
 	 */
-	const BubWidgetsSettings = {
+	const BpWidgetsSettings = {
 
 		/**
 		 * Initialize
@@ -41,21 +41,21 @@
 		 */
 		bindEvents: function () {
 			// Toggle individual widget
-			$('.bub-widget-checkbox').on('change', this.toggleWidget);
+			$('.bp-widget-checkbox').on('change', this.toggleWidget);
 
 			// Toggle all widgets
-			$('.bub-toggle-all').on('click', this.toggleAllWidgets);
+			$('.bp-toggle-all').on('click', this.toggleAllWidgets);
 
 			// Save settings
-			$('.bub-save-settings').on('click', this.saveSettings);
+			$('.bp-save-settings').on('click', this.saveSettings);
 
 			// Click on card to toggle
-			$('.bub-widget-card').on('click', function (e) {
+			$('.bp-widget-card').on('click', function (e) {
 				// Don't trigger if clicking on the checkbox itself
 				if (!$(e.target).hasClass('bub-widget-checkbox') && 
-				    !$(e.target).closest('.bub-widget-toggle').length &&
+				    !$(e.target).closest('.bp-widget-toggle').length &&
 				    !$(e.target).is('a')) {
-					const $checkbox = $(this).find('.bub-widget-checkbox');
+					const $checkbox = $(this).find('.bp-widget-checkbox');
 					$checkbox.prop('checked', !$checkbox.prop('checked')).trigger('change');
 				}
 			});
@@ -72,7 +72,7 @@
 		 */
 		toggleWidget: function (e) {
 			const $checkbox = $(this);
-			const $card = $checkbox.closest('.bub-widget-card');
+			const $card = $checkbox.closest('.bp-widget-card');
 			const isChecked = $checkbox.is(':checked');
 
 			// Update card appearance
@@ -83,7 +83,7 @@
 			}
 
 			// Update toggle all button text
-			BubWidgetsSettings.updateToggleAllButton();
+			BpWidgetsSettings.updateToggleAllButton();
 		},
 
 		/**
@@ -103,9 +103,9 @@
 			const shouldEnable = action === 'enable';
 
 			// Toggle all checkboxes
-			$('.bub-widget-checkbox').each(function () {
+			$('.bp-widget-checkbox').each(function () {
 				const $checkbox = $(this);
-				const $card = $checkbox.closest('.bub-widget-card');
+				const $card = $checkbox.closest('.bp-widget-card');
 
 				$checkbox.prop('checked', shouldEnable);
 
@@ -117,13 +117,13 @@
 			});
 
 			// Update button text
-			BubWidgetsSettings.updateToggleAllButton();
+			BpWidgetsSettings.updateToggleAllButton();
 
 			// Show feedback
-			BubWidgetsSettings.showNotice(
+			BpWidgetsSettings.showNotice(
 				shouldEnable
-					? bubElementorWidgets.strings.enableAll + ' widgets enabled'
-					: bubElementorWidgets.strings.disableAll + ' widgets disabled',
+					? bpElementorWidgets.strings.enableAll + ' widgets enabled'
+					: bpElementorWidgets.strings.disableAll + ' widgets disabled',
 				'success'
 			);
 		},
@@ -137,8 +137,8 @@
 		 * @return {void}
 		 */
 		updateToggleAllButton: function () {
-			const totalWidgets = $('.bub-widget-checkbox').length;
-			const enabledWidgets = $('.bub-widget-checkbox:checked').length;
+			const totalWidgets = $('.bp-widget-checkbox').length;
+			const enabledWidgets = $('.bp-widget-checkbox:checked').length;
 
 			// Update button states (optional visual feedback)
 			if (enabledWidgets === totalWidgets) {
@@ -161,11 +161,11 @@
 			e.preventDefault();
 
 			const $button = $(this);
-			const $status = $('.bub-save-status');
+			const $status = $('.bp-save-status');
 
 			// Get all enabled widgets
 			const enabledWidgets = [];
-			$('.bub-widget-checkbox:checked').each(function () {
+			$('.bp-widget-checkbox:checked').each(function () {
 				enabledWidgets.push($(this).val());
 			});
 
@@ -175,29 +175,29 @@
 
 			// Send AJAX request
 			$.ajax({
-				url: bubElementorWidgets.ajaxUrl,
+				url: bpElementorWidgets.ajaxUrl,
 				type: 'POST',
 				data: {
 					action: 'bub_save_widget_settings',
-					nonce: bubElementorWidgets.nonce,
+					nonce: bpElementorWidgets.nonce,
 					enabled_widgets: enabledWidgets
 				},
 				success: function (response) {
 					if (response.success) {
-						BubWidgetsSettings.showNotice(
-							response.data.message || bubElementorWidgets.strings.saved,
+						BpWidgetsSettings.showNotice(
+							response.data.message || bpElementorWidgets.strings.saved,
 							'success'
 						);
 					} else {
-						BubWidgetsSettings.showNotice(
-							response.data.message || bubElementorWidgets.strings.error,
+						BpWidgetsSettings.showNotice(
+							response.data.message || bpElementorWidgets.strings.error,
 							'error'
 						);
 					}
 				},
 				error: function (xhr, status, error) {
-					BubWidgetsSettings.showNotice(
-						bubElementorWidgets.strings.error,
+					BpWidgetsSettings.showNotice(
+						bpElementorWidgets.strings.error,
 						'error'
 					);
 					console.error('AJAX Error:', error);
@@ -220,7 +220,7 @@
 		 * @return {void}
 		 */
 		showNotice: function (message, type) {
-			const $status = $('.bub-save-status');
+			const $status = $('.bp-save-status');
 
 			// Update message and show
 			$status.text(message)
@@ -236,7 +236,7 @@
 
 	// Initialize when DOM is ready
 	$(document).ready(function () {
-		BubWidgetsSettings.init();
+		BpWidgetsSettings.init();
 	});
 
 })(jQuery);

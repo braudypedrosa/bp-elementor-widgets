@@ -4,11 +4,11 @@
  *
  * Manages the registration and loading of all widgets.
  *
- * @package BUB_Elementor_Widgets
+ * @package BP_Elementor_Widgets
  * @since 1.0.0
  */
 
-namespace BUB_Elementor_Widgets;
+namespace BP_Elementor_Widgets;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -72,8 +72,8 @@ class Widgets_Manager {
 		 */
 		$this->available_widgets = array(
 			'info-box' => array(
-				'title'       => esc_html__( 'Info Box', 'bub-elementor-widgets' ),
-				'description' => esc_html__( 'Display information in a stylish box with icon, title, and description.', 'bub-elementor-widgets' ),
+				'title'       => esc_html__( 'Info Box', 'bp-elementor-widgets' ),
+				'description' => esc_html__( 'Display information in a stylish box with icon, title, and description.', 'bp-elementor-widgets' ),
 				'class'       => 'Info_Box',
 				'file'        => 'info-box.php',
 				'icon'        => 'eicon-info-box',
@@ -81,8 +81,8 @@ class Widgets_Manager {
 			),
 			// Add more widgets here as you build them:
 			// 'pricing-table' => array(
-			//     'title'       => esc_html__( 'Pricing Table', 'bub-elementor-widgets' ),
-			//     'description' => esc_html__( 'Create beautiful pricing tables.', 'bub-elementor-widgets' ),
+			//     'title'       => esc_html__( 'Pricing Table', 'bp-elementor-widgets' ),
+			//     'description' => esc_html__( 'Create beautiful pricing tables.', 'bp-elementor-widgets' ),
 			//     'class'       => 'Pricing_Table',
 			//     'file'        => 'pricing-table.php',
 			//     'icon'        => 'eicon-price-table',
@@ -98,7 +98,7 @@ class Widgets_Manager {
 		 * @since 1.0.0
 		 * @param array $available_widgets Array of available widgets.
 		 */
-		$this->available_widgets = apply_filters( 'bub_elementor_widgets_available', $this->available_widgets );
+		$this->available_widgets = apply_filters( 'bp_elementor_widgets_available', $this->available_widgets );
 	}
 
 	/**
@@ -128,12 +128,12 @@ class Widgets_Manager {
 	 */
 	public function register_widgets( $widgets_manager ) {
 		// Get enabled widgets from settings.
-		$enabled_widgets = get_option( 'bub_elementor_enabled_widgets', array_keys( $this->available_widgets ) );
+		$enabled_widgets = get_option( 'bp_elementor_enabled_widgets', array_keys( $this->available_widgets ) );
 
 		// If it's a fresh install, enable all widgets by default.
-		if ( false === get_option( 'bub_elementor_enabled_widgets' ) ) {
+		if ( false === get_option( 'bp_elementor_enabled_widgets' ) ) {
 			$enabled_widgets = array_keys( $this->available_widgets );
-			update_option( 'bub_elementor_enabled_widgets', $enabled_widgets );
+			update_option( 'bp_elementor_enabled_widgets', $enabled_widgets );
 		}
 
 		// Loop through available widgets and register enabled ones.
@@ -144,7 +144,7 @@ class Widgets_Manager {
 			}
 
 			// Build the widget file path.
-			$widget_file = BUB_ELEMENTOR_WIDGETS_PATH . 'widgets/' . $widget_data['file'];
+			$widget_file = BP_ELEMENTOR_WIDGETS_PATH . 'widgets/' . $widget_data['file'];
 
 			// Check if widget file exists.
 			if ( ! file_exists( $widget_file ) ) {
@@ -155,7 +155,7 @@ class Widgets_Manager {
 			require_once $widget_file;
 
 			// Build the full widget class name with namespace.
-			$widget_class = 'BUB_Elementor_Widgets\\Widgets\\' . $widget_data['class'];
+			$widget_class = 'BP_Elementor_Widgets\\Widgets\\' . $widget_data['class'];
 
 			// Check if class exists.
 			if ( ! class_exists( $widget_class ) ) {
@@ -178,7 +178,7 @@ class Widgets_Manager {
 	 * @return bool True if enabled, false otherwise.
 	 */
 	public function is_widget_enabled( $widget_key ) {
-		$enabled_widgets = get_option( 'bub_elementor_enabled_widgets', array_keys( $this->available_widgets ) );
+		$enabled_widgets = get_option( 'bp_elementor_enabled_widgets', array_keys( $this->available_widgets ) );
 		return in_array( $widget_key, $enabled_widgets, true );
 	}
 }

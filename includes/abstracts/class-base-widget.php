@@ -4,11 +4,11 @@
  *
  * All custom widgets should extend this class to inherit common functionality.
  *
- * @package BUB_Elementor_Widgets
+ * @package BP_Elementor_Widgets
  * @since 1.0.0
  */
 
-namespace BUB_Elementor_Widgets\Abstracts;
+namespace BP_Elementor_Widgets\Abstracts;
 
 use Elementor\Widget_Base;
 
@@ -38,7 +38,7 @@ abstract class Base_Widget extends Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return array( 'bub-widgets' );
+		return array( 'bp-widgets' );
 	}
 
 	/**
@@ -66,7 +66,7 @@ abstract class Base_Widget extends Widget_Base {
 	 * @return array Script handles.
 	 */
 	public function get_script_depends() {
-		return array( 'bub-elementor-widgets' );
+		return array( 'bp-elementor-widgets' );
 	}
 
 	/**
@@ -80,7 +80,7 @@ abstract class Base_Widget extends Widget_Base {
 	 * @return array Style handles.
 	 */
 	public function get_style_depends() {
-		return array( 'bub-elementor-widgets' );
+		return array( 'bp-elementor-widgets' );
 	}
 
 	/**

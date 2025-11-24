@@ -1,10 +1,10 @@
-# BUB Elementor Widgets
+# BP Elementor Widgets
 
 A professional collection of custom Elementor widgets to enhance your website building experience.
 
 ## Description
 
-BUB Elementor Widgets is a modular plugin that provides a collection of powerful, customizable widgets for Elementor page builder. Each widget can be enabled or disabled individually to optimize your site's performance.
+BP Elementor Widgets is a modular plugin that provides a collection of powerful, customizable widgets for Elementor page builder. Each widget can be enabled or disabled individually to optimize your site's performance.
 
 ## Features
 
@@ -62,9 +62,9 @@ Create a new widget file in the `widgets/` directory:
 
 ```php
 <?php
-namespace BUB_Elementor_Widgets\Widgets;
+namespace BP_Elementor_Widgets\Widgets;
 
-use BUB_Elementor_Widgets\Abstracts\Base_Widget;
+use BP_Elementor_Widgets\Abstracts\Base_Widget;
 
 class Your_Widget extends Base_Widget {
     // Your widget code here
@@ -77,8 +77,8 @@ Add your widget to the `$available_widgets` array in `includes/class-widgets-man
 
 ```php
 'your-widget' => array(
-    'title'       => esc_html__( 'Your Widget', 'bub-elementor-widgets' ),
-    'description' => esc_html__( 'Description of your widget.', 'bub-elementor-widgets' ),
+    'title'       => esc_html__( 'Your Widget', 'bp-elementor-widgets' ),
+    'description' => esc_html__( 'Description of your widget.', 'bp-elementor-widgets' ),
     'class'       => 'Your_Widget',
     'file'        => 'your-widget.php',
     'icon'        => 'eicon-info-box',
@@ -104,7 +104,7 @@ elementorFrontend.hooks.addAction(
 ## File Structure
 
 ```
-bub-elementor-widgets/
+bp-elementor-widgets/
 ├── assets/
 │   ├── css/
 │   │   ├── admin.css        # Admin settings page styles
@@ -129,11 +129,11 @@ bub-elementor-widgets/
 
 ### Filters
 
-#### `bub_elementor_widgets_available`
+#### `bp_elementor_widgets_available`
 Modify the available widgets array.
 
 ```php
-add_filter( 'bub_elementor_widgets_available', function( $widgets ) {
+add_filter( 'bp_elementor_widgets_available', function( $widgets ) {
     // Add or modify widgets
     return $widgets;
 });
@@ -175,7 +175,7 @@ For support, please visit:
 
 ## Credits
 
-Developed by BUB
+Developed by BP
 
 ## License
 

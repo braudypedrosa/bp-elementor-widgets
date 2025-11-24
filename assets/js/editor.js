@@ -3,7 +3,7 @@
  *
  * JavaScript functionality for the Elementor editor.
  *
- * @package BUB_Elementor_Widgets
+ * @package BP_Elementor_Widgets
  * @since 1.0.0
  */
 
@@ -17,7 +17,7 @@
 	 *
 	 * @since 1.0.0
 	 */
-	const BubElementorEditor = {
+	const BpElementorEditor = {
 
 		/**
 		 * Initialize
@@ -30,7 +30,7 @@
 		init: function () {
 			// Wait for Elementor editor to be ready
 			$(window).on('elementor:init', function () {
-				BubElementorEditor.initHandlers();
+				BpElementorEditor.initHandlers();
 			});
 		},
 
@@ -47,10 +47,10 @@
 			// For example, custom panel tabs, preview handlers, etc.
 
 			// Example: Add a custom icon to the widgets panel
-			BubElementorEditor.customizeWidgetPanel();
+			BpElementorEditor.customizeWidgetPanel();
 
 			// Example: Add tooltips or help text
-			BubElementorEditor.addHelpTooltips();
+			BpElementorEditor.addHelpTooltips();
 		},
 
 		/**
@@ -99,18 +99,18 @@
 		 */
 		log: function (message, data) {
 			if (typeof console !== 'undefined' && console.log) {
-				console.log('[BUB Elementor Widgets]', message, data || '');
+				console.log('[BP Elementor Widgets]', message, data || '');
 			}
 		}
 	};
 
 	// Initialize when DOM is ready
 	$(document).ready(function () {
-		BubElementorEditor.init();
+		BpElementorEditor.init();
 	});
 
 	// Make it globally accessible
-	window.BubElementorEditor = BubElementorEditor;
+	window.BpElementorEditor = BpElementorEditor;
 
 })(jQuery);
 

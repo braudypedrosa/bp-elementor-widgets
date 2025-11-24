@@ -1,9 +1,9 @@
 /**
  * Frontend Styles
  *
- * Styles for BUB Elementor Widgets on the frontend.
+ * Styles for BP Elementor Widgets on the frontend.
  *
- * @package BUB_Elementor_Widgets
+ * @package BP_Elementor_Widgets
  * @since 1.0.0
  */
 
@@ -11,7 +11,7 @@
    Info Box Widget
    ========================================================================== */
 
-.bub-info-box {
+.bp-info-box {
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -22,51 +22,51 @@
 	transition: all 0.3s ease;
 }
 
-.bub-info-box:hover {
+.bp-info-box:hover {
 	transform: translateY(-5px);
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Icon Position: Top (default) */
-.bub-info-box.bub-icon-position-top {
+.bp-info-box.bp-icon-position-top {
 	align-items: center;
 	text-align: center;
 }
 
 /* Icon Position: Left */
-.bub-info-box.bub-icon-position-left {
+.bp-info-box.bp-icon-position-left {
 	flex-direction: row;
 	align-items: flex-start;
 	text-align: left;
 }
 
-.bub-info-box.bub-icon-position-left .bub-info-box-icon {
+.bp-info-box.bp-icon-position-left .bp-info-box-icon {
 	margin-right: 20px;
 	margin-bottom: 0;
 }
 
-.bub-info-box.bub-icon-position-left .bub-info-box-content {
+.bp-info-box.bp-icon-position-left .bp-info-box-content {
 	flex: 1;
 }
 
 /* Icon Position: Right */
-.bub-info-box.bub-icon-position-right {
+.bp-info-box.bp-icon-position-right {
 	flex-direction: row-reverse;
 	align-items: flex-start;
 	text-align: right;
 }
 
-.bub-info-box.bub-icon-position-right .bub-info-box-icon {
+.bp-info-box.bp-icon-position-right .bp-info-box-icon {
 	margin-left: 20px;
 	margin-bottom: 0;
 }
 
-.bub-info-box.bub-icon-position-right .bub-info-box-content {
+.bp-info-box.bp-icon-position-right .bp-info-box-content {
 	flex: 1;
 }
 
 /* Icon */
-.bub-info-box-icon {
+.bp-info-box-icon {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -74,32 +74,32 @@
 	line-height: 1;
 }
 
-.bub-info-box-icon i {
+.bp-info-box-icon i {
 	font-size: 50px;
 	color: #6EC1E4;
 	transition: all 0.3s ease;
 }
 
-.bub-info-box-icon svg {
+.bp-info-box-icon svg {
 	width: 50px;
 	height: 50px;
 	fill: #6EC1E4;
 	transition: all 0.3s ease;
 }
 
-.bub-info-box:hover .bub-info-box-icon i,
-.bub-info-box:hover .bub-info-box-icon svg {
+.bp-info-box:hover .bp-info-box-icon i,
+.bp-info-box:hover .bp-info-box-icon svg {
 	transform: scale(1.1);
 }
 
 /* Content */
-.bub-info-box-content {
+.bp-info-box-content {
 	display: flex;
 	flex-direction: column;
 }
 
 /* Title */
-.bub-info-box-title {
+.bp-info-box-title {
 	margin: 0 0 15px 0;
 	font-size: 24px;
 	font-weight: 600;
@@ -108,7 +108,7 @@
 }
 
 /* Description */
-.bub-info-box-description {
+.bp-info-box-description {
 	margin: 0;
 	font-size: 16px;
 	color: #666666;
@@ -116,7 +116,7 @@
 }
 
 /* Button */
-.bub-info-box-button {
+.bp-info-box-button {
 	display: inline-block;
 	margin-top: 20px;
 	padding: 12px 30px;
@@ -130,22 +130,22 @@
 	align-self: flex-start;
 }
 
-.bub-info-box.bub-icon-position-top .bub-info-box-button {
+.bp-info-box.bp-icon-position-top .bp-info-box-button {
 	align-self: center;
 }
 
-.bub-info-box.bub-icon-position-right .bub-info-box-button {
+.bp-info-box.bp-icon-position-right .bp-info-box-button {
 	align-self: flex-end;
 }
 
-.bub-info-box-button:hover {
+.bp-info-box-button:hover {
 	background-color: #5AAFCE;
 	transform: translateY(-2px);
 	box-shadow: 0 4px 15px rgba(110, 193, 228, 0.3);
 }
 
 /* When the entire box is a link */
-a.elementor-widget-container > .bub-info-box {
+a.elementor-widget-container > .bp-info-box {
 	cursor: pointer;
 }
 
@@ -156,32 +156,32 @@ a.elementor-widget-container {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-	.bub-info-box {
+	.bp-info-box {
 		padding: 20px;
 	}
 
-	.bub-info-box.bub-icon-position-left,
-	.bub-info-box.bub-icon-position-right {
+	.bp-info-box.bp-icon-position-left,
+	.bp-info-box.bp-icon-position-right {
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
 	}
 
-	.bub-info-box.bub-icon-position-left .bub-info-box-icon,
-	.bub-info-box.bub-icon-position-right .bub-info-box-icon {
+	.bp-info-box.bp-icon-position-left .bp-info-box-icon,
+	.bp-info-box.bp-icon-position-right .bp-info-box-icon {
 		margin: 0 0 20px 0;
 	}
 
-	.bub-info-box-title {
+	.bp-info-box-title {
 		font-size: 20px;
 		margin-bottom: 12px;
 	}
 
-	.bub-info-box-description {
+	.bp-info-box-description {
 		font-size: 14px;
 	}
 
-	.bub-info-box-button {
+	.bp-info-box-button {
 		padding: 10px 24px;
 		font-size: 14px;
 	}
@@ -191,11 +191,11 @@ a.elementor-widget-container {
    Utility Classes
    ========================================================================== */
 
-.bub-widget-hidden {
+.bp-widget-hidden {
 	display: none !important;
 }
 
-.bub-widget-loading {
+.bp-widget-loading {
 	opacity: 0.5;
 	pointer-events: none;
 }

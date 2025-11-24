@@ -1,9 +1,9 @@
 /**
  * Frontend JavaScript
  *
- * JavaScript functionality for BUB Elementor Widgets on the frontend.
+ * JavaScript functionality for BP Elementor Widgets on the frontend.
  *
- * @package BUB_Elementor_Widgets
+ * @package BP_Elementor_Widgets
  * @since 1.0.0
  */
 
@@ -17,7 +17,7 @@
 	 *
 	 * @since 1.0.0
 	 */
-	const BubElementorWidgets = {
+	const BpElementorWidgets = {
 
 		/**
 		 * Initialize
@@ -30,7 +30,7 @@
 		init: function () {
 			// Wait for Elementor frontend to be ready
 			$(window).on('elementor/frontend/init', function () {
-				BubElementorWidgets.initWidgets();
+				BpElementorWidgets.initWidgets();
 			});
 		},
 
@@ -46,14 +46,14 @@
 			// Info Box Widget Handler
 			elementorFrontend.hooks.addAction(
 				'frontend/element_ready/bub-info-box.default',
-				BubElementorWidgets.initInfoBox
+				BpElementorWidgets.initInfoBox
 			);
 
 			// Add more widget handlers here as you create them
 			// Example:
 			// elementorFrontend.hooks.addAction(
 			//     'frontend/element_ready/bub-pricing-table.default',
-			//     BubElementorWidgets.initPricingTable
+			//     BpElementorWidgets.initPricingTable
 			// );
 		},
 
@@ -67,7 +67,7 @@
 		 * @return {void}
 		 */
 		initInfoBox: function ($scope) {
-			const $infoBox = $scope.find('.bub-info-box');
+			const $infoBox = $scope.find('.bp-info-box');
 
 			if (!$infoBox.length) {
 				return;
@@ -77,7 +77,7 @@
 			// For example, animation on scroll, click handlers, etc.
 
 			// Example: Add smooth reveal animation when scrolled into view
-			BubElementorWidgets.animateOnScroll($infoBox);
+			BpElementorWidgets.animateOnScroll($infoBox);
 
 			// Example: Track clicks on box links for analytics
 			$infoBox.on('click', function () {
@@ -145,11 +145,11 @@
 
 	// Initialize when DOM is ready
 	$(document).ready(function () {
-		BubElementorWidgets.init();
+		BpElementorWidgets.init();
 	});
 
 	// Make it globally accessible if needed
-	window.BubElementorWidgets = BubElementorWidgets;
+	window.BpElementorWidgets = BpElementorWidgets;
 
 })(jQuery);
 

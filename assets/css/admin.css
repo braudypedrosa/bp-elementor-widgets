@@ -1,9 +1,9 @@
 /**
  * Admin Styles
  *
- * Styles for the BUB Elementor Widgets settings page in WordPress admin.
+ * Styles for the BP Elementor Widgets settings page in WordPress admin.
  *
- * @package BUB_Elementor_Widgets
+ * @package BP_Elementor_Widgets
  * @since 1.0.0
  */
 
@@ -11,11 +11,11 @@
    Settings Page Layout
    ========================================================================== */
 
-.bub-widgets-settings {
+.bp-widgets-settings {
 	margin: 20px 20px 0 0;
 }
 
-.bub-settings-container {
+.bp-settings-container {
 	max-width: 1400px;
 	background: #ffffff;
 	border: 1px solid #dcdcdc;
@@ -27,7 +27,7 @@
    Header Section
    ========================================================================== */
 
-.bub-settings-header {
+.bp-settings-header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -37,26 +37,26 @@
 	color: #ffffff;
 }
 
-.bub-header-content h2 {
+.bp-header-content h2 {
 	margin: 0 0 8px 0;
 	font-size: 28px;
 	font-weight: 600;
 	color: #ffffff;
 }
 
-.bub-header-content .description {
+.bp-header-content .description {
 	margin: 0;
 	font-size: 14px;
 	color: rgba(255, 255, 255, 0.9);
 	max-width: 600px;
 }
 
-.bub-header-actions {
+.bp-header-actions {
 	display: flex;
 	gap: 10px;
 }
 
-.bub-header-actions .button {
+.bp-header-actions .button {
 	background: rgba(255, 255, 255, 0.2);
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	color: #ffffff;
@@ -66,7 +66,7 @@
 	transition: all 0.3s ease;
 }
 
-.bub-header-actions .button:hover {
+.bp-header-actions .button:hover {
 	background: rgba(255, 255, 255, 0.3);
 	border-color: rgba(255, 255, 255, 0.5);
 	color: #ffffff;
@@ -76,14 +76,14 @@
    Widgets Grid
    ========================================================================== */
 
-.bub-widgets-grid {
+.bp-widgets-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 	gap: 20px;
 	padding: 30px;
 }
 
-.bub-no-widgets {
+.bp-no-widgets {
 	grid-column: 1 / -1;
 	text-align: center;
 	padding: 60px 20px;
@@ -95,7 +95,7 @@
    Widget Cards
    ========================================================================== */
 
-.bub-widget-card {
+.bp-widget-card {
 	position: relative;
 	background: #ffffff;
 	border: 2px solid #e5e5e5;
@@ -105,18 +105,18 @@
 	opacity: 0.7;
 }
 
-.bub-widget-card:hover {
+.bp-widget-card:hover {
 	transform: translateY(-3px);
 	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-.bub-widget-card.active {
+.bp-widget-card.active {
 	border-color: #667eea;
 	opacity: 1;
 	background: linear-gradient(to bottom right, #ffffff 0%, #f9f9ff 100%);
 }
 
-.bub-widget-card.active::before {
+.bp-widget-card.active::before {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -128,14 +128,14 @@
 }
 
 /* Widget Card Header */
-.bub-widget-header {
+.bp-widget-header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 15px;
 }
 
-.bub-widget-icon {
+.bp-widget-icon {
 	width: 50px;
 	height: 50px;
 	display: flex;
@@ -148,30 +148,30 @@
 	transition: all 0.3s ease;
 }
 
-.bub-widget-card.active .bub-widget-icon {
+.bp-widget-card.active .bp-widget-icon {
 	transform: scale(1.05);
 	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
 /* Widget Toggle Switch */
-.bub-widget-toggle {
+.bp-widget-toggle {
 	flex-shrink: 0;
 }
 
-.bub-switch {
+.bp-switch {
 	position: relative;
 	display: inline-block;
 	width: 50px;
 	height: 26px;
 }
 
-.bub-switch input {
+.bp-switch input {
 	opacity: 0;
 	width: 0;
 	height: 0;
 }
 
-.bub-slider {
+.bp-slider {
 	position: absolute;
 	cursor: pointer;
 	top: 0;
@@ -183,7 +183,7 @@
 	border-radius: 26px;
 }
 
-.bub-slider:before {
+.bp-slider:before {
 	position: absolute;
 	content: "";
 	height: 20px;
@@ -196,20 +196,20 @@
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-input:checked + .bub-slider {
+input:checked + .bp-slider {
 	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-input:checked + .bub-slider:before {
+input:checked + .bp-slider:before {
 	transform: translateX(24px);
 }
 
 /* Widget Card Body */
-.bub-widget-body {
+.bp-widget-body {
 	padding: 10px 0;
 }
 
-.bub-widget-title {
+.bp-widget-title {
 	margin: 0 0 8px 0;
 	font-size: 18px;
 	font-weight: 600;
@@ -217,11 +217,11 @@ input:checked + .bub-slider:before {
 	transition: color 0.3s ease;
 }
 
-.bub-widget-card.active .bub-widget-title {
+.bp-widget-card.active .bp-widget-title {
 	color: #667eea;
 }
 
-.bub-widget-description {
+.bp-widget-description {
 	margin: 0;
 	font-size: 14px;
 	line-height: 1.6;
@@ -229,13 +229,13 @@ input:checked + .bub-slider:before {
 }
 
 /* Widget Card Footer */
-.bub-widget-footer {
+.bp-widget-footer {
 	margin-top: 15px;
 	padding-top: 15px;
 	border-top: 1px solid #e5e5e5;
 }
 
-.bub-demo-link {
+.bp-demo-link {
 	display: inline-block;
 	font-size: 13px;
 	color: #667eea;
@@ -244,17 +244,17 @@ input:checked + .bub-slider:before {
 	transition: color 0.3s ease;
 }
 
-.bub-demo-link:hover {
+.bp-demo-link:hover {
 	color: #764ba2;
 }
 
-.bub-demo-link::after {
+.bp-demo-link::after {
 	content: ' →';
 	display: inline-block;
 	transition: transform 0.3s ease;
 }
 
-.bub-demo-link:hover::after {
+.bp-demo-link:hover::after {
 	transform: translateX(3px);
 }
 
@@ -262,7 +262,7 @@ input:checked + .bub-slider:before {
    Settings Footer
    ========================================================================== */
 
-.bub-settings-footer {
+.bp-settings-footer {
 	display: flex;
 	align-items: center;
 	gap: 15px;
@@ -271,7 +271,7 @@ input:checked + .bub-slider:before {
 	background: #f9f9f9;
 }
 
-.bub-save-settings {
+.bp-save-settings {
 	padding: 10px 30px !important;
 	height: auto !important;
 	font-size: 16px !important;
@@ -281,16 +281,16 @@ input:checked + .bub-slider:before {
 	transition: all 0.3s ease !important;
 }
 
-.bub-save-settings:hover {
+.bp-save-settings:hover {
 	transform: translateY(-2px) !important;
 	box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
 }
 
-.bub-save-settings:active {
+.bp-save-settings:active {
 	transform: translateY(0) !important;
 }
 
-.bub-save-status {
+.bp-save-status {
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
@@ -300,19 +300,19 @@ input:checked + .bub-slider:before {
 	transition: opacity 0.3s ease;
 }
 
-.bub-save-status.show {
+.bp-save-status.show {
 	opacity: 1;
 }
 
-.bub-save-status.success {
+.bp-save-status.success {
 	color: #46b450;
 }
 
-.bub-save-status.error {
+.bp-save-status.error {
 	color: #dc3232;
 }
 
-.bub-save-status::before {
+.bp-save-status::before {
 	content: '✓';
 	display: inline-block;
 	width: 18px;
@@ -325,17 +325,17 @@ input:checked + .bub-slider:before {
 	color: #ffffff;
 }
 
-.bub-save-status.error::before {
+.bp-save-status.error::before {
 	content: '✕';
 }
 
 /* Loading State */
-.bub-save-settings.loading {
+.bp-save-settings.loading {
 	opacity: 0.6;
 	pointer-events: none;
 }
 
-.bub-save-settings.loading::after {
+.bp-save-settings.loading::after {
 	content: '';
 	display: inline-block;
 	width: 14px;
@@ -358,37 +358,37 @@ input:checked + .bub-slider:before {
    ========================================================================== */
 
 @media (max-width: 1200px) {
-	.bub-widgets-grid {
+	.bp-widgets-grid {
 		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 	}
 }
 
 @media (max-width: 768px) {
-	.bub-settings-header {
+	.bp-settings-header {
 		flex-direction: column;
 		align-items: flex-start;
 		gap: 20px;
 	}
 
-	.bub-header-actions {
+	.bp-header-actions {
 		width: 100%;
 	}
 
-	.bub-header-actions .button {
+	.bp-header-actions .button {
 		flex: 1;
 	}
 
-	.bub-widgets-grid {
+	.bp-widgets-grid {
 		grid-template-columns: 1fr;
 		padding: 20px;
 	}
 
-	.bub-settings-footer {
+	.bp-settings-footer {
 		flex-direction: column;
 		align-items: stretch;
 	}
 
-	.bub-save-settings {
+	.bp-save-settings {
 		width: 100%;
 	}
 }

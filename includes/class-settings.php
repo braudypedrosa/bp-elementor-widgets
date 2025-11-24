@@ -4,11 +4,11 @@
  *
  * Handles the plugin settings page in WordPress admin.
  *
- * @package BUB_Elementor_Widgets
+ * @package BP_Elementor_Widgets
  * @since 1.0.0
  */
 
-namespace BUB_Elementor_Widgets;
+namespace BP_Elementor_Widgets;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -50,10 +50,10 @@ class Settings {
 	 */
 	public function add_admin_menu() {
 		add_menu_page(
-			esc_html__( 'BUB Elementor Widgets', 'bub-elementor-widgets' ),
-			esc_html__( 'BUB Widgets', 'bub-elementor-widgets' ),
+			esc_html__( 'BUB Elementor Widgets', 'bp-elementor-widgets' ),
+			esc_html__( 'BP Widgets', 'bp-elementor-widgets' ),
 			'manage_options',
-			'bub-elementor-widgets',
+			'bp-elementor-widgets',
 			array( $this, 'render_settings_page' ),
 			'dashicons-layout',
 			59
@@ -71,8 +71,8 @@ class Settings {
 	 */
 	public function register_settings() {
 		register_setting(
-			'bub_elementor_widgets_settings',
-			'bub_elementor_enabled_widgets',
+			'bp_elementor_widgets_settings',
+			'bp_elementor_enabled_widgets',
 			array(
 				'type'              => 'array',
 				'sanitize_callback' => array( $this, 'sanitize_enabled_widgets' ),
@@ -130,17 +130,17 @@ class Settings {
 		// Enqueue admin styles.
 		wp_enqueue_style(
 			'bub-elementor-widgets-admin',
-			BUB_ELEMENTOR_WIDGETS_URL . 'assets/css/admin.css',
+			BP_ELEMENTOR_WIDGETS_URL . 'assets/css/admin.css',
 			array(),
-			BUB_ELEMENTOR_WIDGETS_VERSION
+			BP_ELEMENTOR_WIDGETS_VERSION
 		);
 
 		// Enqueue admin scripts.
 		wp_enqueue_script(
 			'bub-elementor-widgets-admin',
-			BUB_ELEMENTOR_WIDGETS_URL . 'assets/js/admin.js',
+			BP_ELEMENTOR_WIDGETS_URL . 'assets/js/admin.js',
 			array( 'jquery' ),
-			BUB_ELEMENTOR_WIDGETS_VERSION,
+			BP_ELEMENTOR_WIDGETS_VERSION,
 			true
 		);
 
@@ -152,10 +152,10 @@ class Settings {
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 				'nonce'   => wp_create_nonce( 'bub_widgets_nonce' ),
 				'strings' => array(
-					'saved'       => esc_html__( 'Settings saved successfully!', 'bub-elementor-widgets' ),
-					'error'       => esc_html__( 'Error saving settings. Please try again.', 'bub-elementor-widgets' ),
-					'enableAll'   => esc_html__( 'Enable All', 'bub-elementor-widgets' ),
-					'disableAll'  => esc_html__( 'Disable All', 'bub-elementor-widgets' ),
+					'saved'       => esc_html__( 'Settings saved successfully!', 'bp-elementor-widgets' ),
+					'error'       => esc_html__( 'Error saving settings. Please try again.', 'bp-elementor-widgets' ),
+					'enableAll'   => esc_html__( 'Enable All', 'bp-elementor-widgets' ),
+					'disableAll'  => esc_html__( 'Disable All', 'bp-elementor-widgets' ),
 				),
 			)
 		);
@@ -176,7 +176,7 @@ class Settings {
 
 		// Check user capabilities.
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Permission denied.', 'bub-elementor-widgets' ) ) );
+			wp_send_json_error( array( 'message' => esc_html__( 'Permission denied.', 'bp-elementor-widgets' ) ) );
 		}
 
 		// Get enabled widgets from POST data.
@@ -184,12 +184,12 @@ class Settings {
 
 		// Sanitize and update option.
 		$sanitized = $this->sanitize_enabled_widgets( $enabled_widgets );
-		update_option( 'bub_elementor_enabled_widgets', $sanitized );
+		update_option( 'bp_elementor_enabled_widgets', $sanitized );
 
 		// Send success response.
 		wp_send_json_success(
 			array(
-				'message' => esc_html__( 'Settings saved successfully!', 'bub-elementor-widgets' ),
+				'message' => esc_html__( 'Settings saved successfully!', 'bp-elementor-widgets' ),
 			)
 		);
 	}
@@ -207,7 +207,7 @@ class Settings {
 		// Get widgets manager instance.
 		$widgets_manager = Plugin::instance()->widgets_manager;
 		$available_widgets = $widgets_manager->get_available_widgets();
-		$enabled_widgets = get_option( 'bub_elementor_enabled_widgets', array_keys( $available_widgets ) );
+		$enabled_widgets = get_option( 'bp_elementor_enabled_widgets', array_keys( $available_widgets ) );
 		?>
 		<div class="wrap bub-widgets-settings">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
@@ -216,17 +216,17 @@ class Settings {
 				<!-- Header Section -->
 				<div class="bub-settings-header">
 					<div class="bub-header-content">
-						<h2><?php esc_html_e( 'Widget Manager', 'bub-elementor-widgets' ); ?></h2>
+						<h2><?php esc_html_e( 'Widget Manager', 'bp-elementor-widgets' ); ?></h2>
 						<p class="description">
-							<?php esc_html_e( 'Enable or disable widgets to optimize your site performance. Only enabled widgets will be loaded.', 'bub-elementor-widgets' ); ?>
+							<?php esc_html_e( 'Enable or disable widgets to optimize your site performance. Only enabled widgets will be loaded.', 'bp-elementor-widgets' ); ?>
 						</p>
 					</div>
 					<div class="bub-header-actions">
 						<button type="button" class="button bub-toggle-all" data-action="enable">
-							<?php esc_html_e( 'Enable All', 'bub-elementor-widgets' ); ?>
+							<?php esc_html_e( 'Enable All', 'bp-elementor-widgets' ); ?>
 						</button>
 						<button type="button" class="button bub-toggle-all" data-action="disable">
-							<?php esc_html_e( 'Disable All', 'bub-elementor-widgets' ); ?>
+							<?php esc_html_e( 'Disable All', 'bp-elementor-widgets' ); ?>
 						</button>
 					</div>
 				</div>
@@ -237,7 +237,7 @@ class Settings {
 					if ( empty( $available_widgets ) ) {
 						?>
 						<div class="bub-no-widgets">
-							<p><?php esc_html_e( 'No widgets available yet.', 'bub-elementor-widgets' ); ?></p>
+							<p><?php esc_html_e( 'No widgets available yet.', 'bp-elementor-widgets' ); ?></p>
 						</div>
 						<?php
 					} else {
@@ -270,7 +270,7 @@ class Settings {
 								<?php if ( isset( $widget_data['demo_url'] ) && ! empty( $widget_data['demo_url'] ) ) : ?>
 									<div class="bub-widget-footer">
 										<a href="<?php echo esc_url( $widget_data['demo_url'] ); ?>" target="_blank" class="bub-demo-link">
-											<?php esc_html_e( 'View Demo', 'bub-elementor-widgets' ); ?>
+											<?php esc_html_e( 'View Demo', 'bp-elementor-widgets' ); ?>
 										</a>
 									</div>
 								<?php endif; ?>
@@ -284,7 +284,7 @@ class Settings {
 				<!-- Save Button -->
 				<div class="bub-settings-footer">
 					<button type="button" class="button button-primary button-large bub-save-settings">
-						<?php esc_html_e( 'Save Changes', 'bub-elementor-widgets' ); ?>
+						<?php esc_html_e( 'Save Changes', 'bp-elementor-widgets' ); ?>
 					</button>
 					<span class="bub-save-status"></span>
 				</div>
