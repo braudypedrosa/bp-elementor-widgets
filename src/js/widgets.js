@@ -68,6 +68,14 @@
 			);
 		}
 
+		// Testimonial Widget
+		if (window.BpWidgets.Testimonial) {
+			elementorFrontend.hooks.addAction(
+				'frontend/element_ready/bp-testimonial.default',
+				window.BpWidgets.Testimonial.init
+			);
+		}
+
 		// Add more widget handlers here as you create them
 	};
 

@@ -95,6 +95,14 @@ class Widgets_Manager {
 				'icon'        => 'eicon-gallery-grid',
 				'is_pro'      => false,
 			),
+			'testimonial' => array(
+				'title'       => esc_html__( 'Testimonial', 'bp-elementor-widgets' ),
+				'description' => esc_html__( 'Display customer testimonials with ratings in slider or grid layout.', 'bp-elementor-widgets' ),
+				'class'       => 'Testimonial',
+				'file'        => 'testimonial.php',
+				'icon'        => 'eicon-testimonial',
+				'is_pro'      => false,
+			),
 			// Add more widgets here as you build them:
 			// 'pricing-table' => array(
 			//     'title'       => esc_html__( 'Pricing Table', 'bp-elementor-widgets' ),
