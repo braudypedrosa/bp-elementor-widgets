@@ -157,21 +157,34 @@ npm run deploy
 
 ## Working with SCSS
 
+All styles use modern SCSS syntax with `@use` modules (Sass 3.0 compatible).
+
 ### Adding a New Widget Style:
 
 1. Create `src/scss/widgets/_your-widget.scss`
-2. Add your styles using variables and mixins
-3. Import in `src/scss/frontend.scss`:
+2. Load variables and mixins at the top:
 
 ```scss
-@import 'widgets/your-widget';
+@use '../variables' as *;
+@use '../mixins' as *;
 ```
 
-4. Run `npm run build`
+3. Add your styles using variables and mixins
+4. Load in `src/scss/frontend.scss`:
+
+```scss
+@use 'widgets/your-widget';
+```
+
+5. Run `npm run build`
 
 ### Using Variables:
 
 ```scss
+// At the top of your widget SCSS file
+@use '../variables' as *;
+@use '../mixins' as *;
+
 .my-widget {
     color: $color-primary;
     padding: $spacing-lg;
