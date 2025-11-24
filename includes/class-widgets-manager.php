@@ -79,6 +79,14 @@ class Widgets_Manager {
 				'icon'        => 'eicon-info-box',
 				'is_pro'      => false,
 			),
+			'countdown-timer' => array(
+				'title'       => esc_html__( 'Countdown Timer', 'bp-elementor-widgets' ),
+				'description' => esc_html__( 'Create urgency with a customizable countdown timer featuring recurring options.', 'bp-elementor-widgets' ),
+				'class'       => 'Countdown_Timer',
+				'file'        => 'countdown-timer.php',
+				'icon'        => 'eicon-countdown',
+				'is_pro'      => false,
+			),
 			// Add more widgets here as you build them:
 			// 'pricing-table' => array(
 			//     'title'       => esc_html__( 'Pricing Table', 'bp-elementor-widgets' ),

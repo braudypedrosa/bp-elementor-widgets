@@ -184,6 +184,15 @@ final class Plugin {
 			BP_ELEMENTOR_WIDGETS_VERSION,
 			true
 		);
+
+		// Register countdown timer script.
+		wp_register_script(
+			'bp-countdown-timer',
+			BP_ELEMENTOR_WIDGETS_URL . 'assets/js/countdown-timer.js',
+			array( 'jquery', 'elementor-frontend' ),
+			BP_ELEMENTOR_WIDGETS_VERSION,
+			true
+		);
 	}
 
 	/**
