@@ -161,7 +161,7 @@ final class Plugin {
 	public function enqueue_frontend_styles() {
 		// Enqueue Font Awesome 6 Free (latest stable version).
 		wp_enqueue_style(
-			'font-awesome',
+			'bp-font-awesome',
 			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
 			array(),
 			'6.5.1'
@@ -169,7 +169,7 @@ final class Plugin {
 
 		// Enqueue Slick Carousel CSS (base only, no theme).
 		wp_enqueue_style(
-			'slick-carousel',
+			'bp-slick-carousel',
 			'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css',
 			array(),
 			'1.8.1'
@@ -180,7 +180,7 @@ final class Plugin {
 		wp_enqueue_style(
 			'bp-elementor-widgets',
 			BP_ELEMENTOR_WIDGETS_URL . 'dist/css/frontend.min.css',
-			array( 'font-awesome', 'slick-carousel' ),
+			array( 'bp-font-awesome', 'bp-slick-carousel' ),
 			BP_ELEMENTOR_WIDGETS_VERSION
 		);
 	}
@@ -197,7 +197,7 @@ final class Plugin {
 	public function enqueue_frontend_scripts() {
 		// Register Slick Carousel JS.
 		wp_register_script(
-			'slick-carousel',
+			'bp-slick-carousel',
 			'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js',
 			array( 'jquery' ),
 			'1.8.1',
@@ -216,7 +216,7 @@ final class Plugin {
 		wp_register_script(
 			'bp-elementor-widgets-widgets',
 			BP_ELEMENTOR_WIDGETS_URL . 'dist/js/widgets.min.js',
-			array( 'jquery', 'slick-carousel', 'elementor-frontend' ),
+			array( 'jquery', 'bp-slick-carousel', 'elementor-frontend' ),
 			BP_ELEMENTOR_WIDGETS_VERSION,
 			true
 		);

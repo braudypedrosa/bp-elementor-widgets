@@ -137,7 +137,7 @@ class Settings {
 
 		// Enqueue Font Awesome for admin.
 		wp_enqueue_style(
-			'font-awesome',
+			'bp-font-awesome',
 			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
 			array(),
 			'6.5.1'
