@@ -19,20 +19,25 @@
 	 */
 	const BpWidgets = {
 
-		/**
-		 * Initialize
-		 *
-		 * Initialize all widget handlers when Elementor is ready.
-		 *
-		 * @since 1.0.0
-		 * @return {void}
-		 */
-		init: function () {
+	/**
+	 * Initialize
+	 *
+	 * Initialize all widget handlers when Elementor is ready.
+	 *
+	 * @since 1.0.0
+	 * @return {void}
+	 */
+	init: function () {
+		// Check if Elementor frontend is already initialized
+		if (typeof elementorFrontend !== 'undefined' && elementorFrontend.hooks) {
+			BpWidgets.registerWidgets();
+		} else {
 			// Wait for Elementor frontend to be ready
 			$(window).on('elementor/frontend/init', function () {
 				BpWidgets.registerWidgets();
 			});
-		},
+		}
+	},
 
 		/**
 		 * Register Widgets
@@ -132,50 +137,55 @@
 			BpWidgets.CountdownTimer.startCountdown($timer, settings);
 		},
 
-		/**
-		 * Start Countdown
-		 *
-		 * @since 1.0.0
-		 * @param {jQuery} $timer The timer element.
-		 * @param {Object} settings The timer settings.
-		 * @return {void}
-		 */
-		startCountdown: function ($timer, settings) {
-			// Calculate the target date
-			let targetDate = BpWidgets.CountdownTimer.calculateTargetDate(settings);
+	/**
+	 * Start Countdown
+	 *
+	 * @since 1.0.0
+	 * @param {jQuery} $timer The timer element.
+	 * @param {Object} settings The timer settings.
+	 * @return {void}
+	 */
+	startCountdown: function ($timer, settings) {
+		// Calculate the target date
+		let targetDate = BpWidgets.CountdownTimer.calculateTargetDate(settings);
 
-			// Update the countdown every second
-			const updateInterval = setInterval(function () {
-				const now = new Date().getTime();
-				const distance = targetDate - now;
+		// Function to update countdown
+		const updateCountdown = function () {
+			const now = new Date().getTime();
+			const distance = targetDate - now;
 
-				// If countdown finished
-				if (distance < 0) {
-					if (settings.countdownType === 'recurring') {
-						// Recalculate target date for recurring countdown
-						targetDate = BpWidgets.CountdownTimer.calculateTargetDate(settings);
-					} else {
-						// One-time countdown finished
-						clearInterval(updateInterval);
-						BpWidgets.CountdownTimer.displayZeros($timer);
-						return;
-					}
+			// If countdown finished
+			if (distance < 0) {
+				if (settings.countdownType === 'recurring') {
+					// Recalculate target date for recurring countdown
+					targetDate = BpWidgets.CountdownTimer.calculateTargetDate(settings);
+				} else {
+					// One-time countdown finished
+					clearInterval(updateInterval);
+					BpWidgets.CountdownTimer.displayZeros($timer);
+					return;
 				}
+			}
 
-				// Calculate time units
-				const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-				const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-				const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-				const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+			// Calculate time units
+			const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-				// Update the display
-				BpWidgets.CountdownTimer.updateDisplay($timer, days, hours, minutes, seconds);
+			// Update the display
+			BpWidgets.CountdownTimer.updateDisplay($timer, days, hours, minutes, seconds);
+		};
 
-			}, 1000);
+		// Run immediately on load
+		updateCountdown();
 
-			// Store the interval ID so we can clear it later if needed
-			$timer.data('countdown-interval', updateInterval);
-		},
+		// Update the countdown every second
+		const updateInterval = setInterval(updateCountdown, 1000);
+
+		// Store the interval ID so we can clear it later if needed
+		$timer.data('countdown-interval', updateInterval);
+	},
 
 		/**
 		 * Calculate Target Date
