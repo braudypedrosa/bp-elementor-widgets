@@ -252,37 +252,6 @@
 		}
 	}
 	
-	// Thumbnail Size Variations
-	&.bp-gallery-thumbnails-small {
-		.bp-gallery-thumb-item {
-			padding: 0 3px;
-			
-			img {
-				border-width: 2px;
-				border-radius: 3px;
-			}
-		}
-	}
-	
-	&.bp-gallery-thumbnails-medium {
-		.bp-gallery-thumb-item {
-			padding: 0 4px;
-			
-			img {
-				border-width: 2px;
-			}
-		}
-	}
-	
-	&.bp-gallery-thumbnails-large {
-		.bp-gallery-thumb-item {
-			padding: 0 5px;
-			
-			img {
-				border-width: 3px;
-			}
-		}
-	}
 }
 
 // Loading State

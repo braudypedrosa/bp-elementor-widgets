@@ -1,7 +1,8 @@
 /**
- * Widgets JavaScript
+ * Widgets JavaScript - Main Entry Point
  *
  * Combined JavaScript for all BP Elementor Widgets.
+ * This file imports individual widget handlers and initializes them.
  *
  * @package BP_Elementor_Widgets
  * @since 1.0.0
@@ -19,25 +20,25 @@
 	 */
 	const BpWidgets = {
 
-	/**
-	 * Initialize
-	 *
-	 * Initialize all widget handlers when Elementor is ready.
-	 *
-	 * @since 1.0.0
-	 * @return {void}
-	 */
-	init: function () {
-		// Check if Elementor frontend is already initialized
-		if (typeof elementorFrontend !== 'undefined' && elementorFrontend.hooks) {
-			BpWidgets.registerWidgets();
-		} else {
-			// Wait for Elementor frontend to be ready
-			$(window).on('elementor/frontend/init', function () {
+		/**
+		 * Initialize
+		 *
+		 * Initialize all widget handlers when Elementor is ready.
+		 *
+		 * @since 1.0.0
+		 * @return {void}
+		 */
+		init: function () {
+			// Check if Elementor frontend is already initialized
+			if (typeof elementorFrontend !== 'undefined' && elementorFrontend.hooks) {
 				BpWidgets.registerWidgets();
-			});
-		}
-	},
+			} else {
+				// Wait for Elementor frontend to be ready
+				$(window).on('elementor/frontend/init', function () {
+					BpWidgets.registerWidgets();
+				});
+			}
+		},
 
 		/**
 		 * Register Widgets
@@ -49,385 +50,30 @@
 		 */
 		registerWidgets: function () {
 			// Info Box Widget
-			elementorFrontend.hooks.addAction(
-				'frontend/element_ready/bp-info-box.default',
-				BpWidgets.InfoBox.init
-			);
-
-		// Countdown Timer Widget
-		elementorFrontend.hooks.addAction(
-			'frontend/element_ready/bp-countdown-timer.default',
-			BpWidgets.CountdownTimer.init
-		);
-
-		// Gallery Widget
-		elementorFrontend.hooks.addAction(
-			'frontend/element_ready/bp-gallery.default',
-			BpWidgets.Gallery.init
-		);
-
-		// Add more widget handlers here as you create them
-	}
-	};
-
-	/**
-	 * Info Box Widget Handler
-	 *
-	 * @since 1.0.0
-	 */
-	BpWidgets.InfoBox = {
-
-		/**
-		 * Initialize Info Box
-		 *
-		 * @since 1.0.0
-		 * @param {jQuery} $scope The widget wrapper element.
-		 * @return {void}
-		 */
-		init: function ($scope) {
-			const $infoBox = $scope.find('.bp-info-box');
-
-			if (!$infoBox.length) {
-				return;
+			if (BpWidgets.InfoBox) {
+				elementorFrontend.hooks.addAction(
+					'frontend/element_ready/bp-info-box.default',
+					BpWidgets.InfoBox.init
+				);
 			}
 
-			// Add any custom JavaScript functionality for the Info Box here
-			// For example, animation on scroll, click handlers, etc.
-
-			// Example: Add smooth reveal animation when scrolled into view
-			BpWidgets.Utils.animateOnScroll($infoBox);
-
-			// Example: Track clicks on box links for analytics
-			$infoBox.on('click', function () {
-				// You can add Google Analytics tracking or other analytics here
-				// Example: gtag('event', 'click', { 'event_category': 'Info Box' });
-			});
-		}
-	};
-
-	/**
-	 * Countdown Timer Widget Handler
-	 *
-	 * @since 1.0.0
-	 */
-	BpWidgets.CountdownTimer = {
-
-		/**
-		 * Initialize Countdown Timer
-		 *
-		 * @since 1.0.0
-		 * @param {jQuery} $scope The widget wrapper element.
-		 * @return {void}
-		 */
-		init: function ($scope) {
-			const $timer = $scope.find('.bp-countdown-timer');
-
-			if (!$timer.length) {
-				return;
+			// Countdown Timer Widget
+			if (BpWidgets.CountdownTimer) {
+				elementorFrontend.hooks.addAction(
+					'frontend/element_ready/bp-countdown-timer.default',
+					BpWidgets.CountdownTimer.init
+				);
 			}
 
-			// Get settings from data attributes
-			const settings = {
-				targetDate: $timer.data('target-date'),
-				countdownType: $timer.data('countdown-type'),
-				recurringType: $timer.data('recurring-type'),
-				recurringDays: parseInt($timer.data('recurring-days')) || 7,
-				recurringHours: parseInt($timer.data('recurring-hours')) || 24,
-				showDays: $timer.data('show-days') === 'yes',
-				showHours: $timer.data('show-hours') === 'yes',
-				showMinutes: $timer.data('show-minutes') === 'yes',
-				showSeconds: $timer.data('show-seconds') === 'yes',
-			};
-
-			// Start the countdown
-			BpWidgets.CountdownTimer.startCountdown($timer, settings);
-		},
-
-	/**
-	 * Start Countdown
-	 *
-	 * @since 1.0.0
-	 * @param {jQuery} $timer The timer element.
-	 * @param {Object} settings The timer settings.
-	 * @return {void}
-	 */
-	startCountdown: function ($timer, settings) {
-		// Calculate the target date
-		let targetDate = BpWidgets.CountdownTimer.calculateTargetDate(settings);
-
-		// Function to update countdown
-		const updateCountdown = function () {
-			const now = new Date().getTime();
-			const distance = targetDate - now;
-
-			// If countdown finished
-			if (distance < 0) {
-				if (settings.countdownType === 'recurring') {
-					// Recalculate target date for recurring countdown
-					targetDate = BpWidgets.CountdownTimer.calculateTargetDate(settings);
-				} else {
-					// One-time countdown finished
-					clearInterval(updateInterval);
-					BpWidgets.CountdownTimer.displayZeros($timer);
-					return;
-				}
+			// Gallery Widget
+			if (BpWidgets.Gallery) {
+				elementorFrontend.hooks.addAction(
+					'frontend/element_ready/bp-gallery.default',
+					BpWidgets.Gallery.init
+				);
 			}
 
-			// Calculate time units
-			const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-			const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-			const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-			const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-			// Update the display
-			BpWidgets.CountdownTimer.updateDisplay($timer, days, hours, minutes, seconds);
-		};
-
-		// Run immediately on load
-		updateCountdown();
-
-		// Update the countdown every second
-		const updateInterval = setInterval(updateCountdown, 1000);
-
-		// Store the interval ID so we can clear it later if needed
-		$timer.data('countdown-interval', updateInterval);
-	},
-
-		/**
-		 * Calculate Target Date
-		 *
-		 * @since 1.0.0
-		 * @param {Object} settings The timer settings.
-		 * @return {number} Target date timestamp.
-		 */
-		calculateTargetDate: function (settings) {
-			const now = new Date().getTime();
-			let targetDate = new Date(settings.targetDate).getTime();
-
-			// If recurring, calculate next occurrence
-			if (settings.countdownType === 'recurring') {
-				// If target date is in the past, find the next occurrence
-				if (targetDate < now) {
-					let increment;
-
-					if (settings.recurringType === 'days') {
-						increment = settings.recurringDays * 24 * 60 * 60 * 1000;
-					} else {
-						increment = settings.recurringHours * 60 * 60 * 1000;
-					}
-
-					// Calculate how many increments have passed
-					const timePassed = now - targetDate;
-					const incrementsPassed = Math.floor(timePassed / increment);
-
-					// Add enough increments to get to the next future occurrence
-					targetDate = targetDate + ((incrementsPassed + 1) * increment);
-				}
-			}
-
-			return targetDate;
-		},
-
-		/**
-		 * Update Display
-		 *
-		 * @since 1.0.0
-		 * @param {jQuery} $timer The timer element.
-		 * @param {number} days Days remaining.
-		 * @param {number} hours Hours remaining.
-		 * @param {number} minutes Minutes remaining.
-		 * @param {number} seconds Seconds remaining.
-		 * @return {void}
-		 */
-		updateDisplay: function ($timer, days, hours, minutes, seconds) {
-			// Format numbers with leading zeros
-			const formattedDays = BpWidgets.Utils.padNumber(days);
-			const formattedHours = BpWidgets.Utils.padNumber(hours);
-			const formattedMinutes = BpWidgets.Utils.padNumber(minutes);
-			const formattedSeconds = BpWidgets.Utils.padNumber(seconds);
-
-			// Update each element
-			$timer.find('.bp-countdown-days').text(formattedDays);
-			$timer.find('.bp-countdown-hours').text(formattedHours);
-			$timer.find('.bp-countdown-minutes').text(formattedMinutes);
-			$timer.find('.bp-countdown-seconds').text(formattedSeconds);
-
-			// Add animation class for visual feedback
-			$timer.find('.bp-countdown-digit').addClass('bp-countdown-tick');
-			setTimeout(function () {
-				$timer.find('.bp-countdown-digit').removeClass('bp-countdown-tick');
-			}, 300);
-		},
-
-		/**
-		 * Display Zeros
-		 *
-		 * @since 1.0.0
-		 * @param {jQuery} $timer The timer element.
-		 * @return {void}
-		 */
-		displayZeros: function ($timer) {
-			$timer.find('.bp-countdown-days').text('00');
-			$timer.find('.bp-countdown-hours').text('00');
-			$timer.find('.bp-countdown-minutes').text('00');
-			$timer.find('.bp-countdown-seconds').text('00');
-
-			// Add finished class
-			$timer.addClass('bp-countdown-finished');
-
-			// Trigger custom event
-			$timer.trigger('bpCountdownFinished');
-		}
-	};
-
-	/**
-	 * Gallery Widget Handler
-	 *
-	 * @since 1.0.0
-	 */
-	BpWidgets.Gallery = {
-
-		/**
-		 * Initialize Gallery
-		 *
-		 * @since 1.0.0
-		 * @param {jQuery} $scope The widget wrapper element.
-		 * @return {void}
-		 */
-		init: function ($scope) {
-			const $container = $scope.find('.bp-gallery-container');
-			const $gallery = $scope.find('.bp-gallery');
-			const $thumbnails = $scope.find('.bp-gallery-thumbnails');
-
-			if (!$gallery.length) {
-				return;
-			}
-
-			// Completely destroy and clean up existing Slick instances
-			BpWidgets.Gallery.destroy($gallery, $thumbnails);
-
-			// Use requestAnimationFrame for smoother re-initialization
-			requestAnimationFrame(function() {
-				BpWidgets.Gallery.initializeSlick($scope, $gallery, $thumbnails);
-			});
-		},
-
-		/**
-		 * Destroy Slick Instances
-		 *
-		 * @since 1.0.0
-		 * @param {jQuery} $gallery The gallery element.
-		 * @param {jQuery} $thumbnails The thumbnails element.
-		 * @return {void}
-		 */
-		destroy: function ($gallery, $thumbnails) {
-			try {
-				// Remove all Slick-generated elements and classes
-				if ($gallery.hasClass('slick-initialized')) {
-					$gallery.slick('unslick');
-				}
-				if ($thumbnails.length && $thumbnails.hasClass('slick-initialized')) {
-					$thumbnails.slick('unslick');
-				}
-
-				// Clean up any remaining Slick artifacts
-				$gallery.removeClass('slick-slider slick-initialized').removeAttr('style');
-				$thumbnails.removeClass('slick-slider slick-initialized').removeAttr('style');
-				
-				// Remove any leftover Slick elements
-				$gallery.find('.slick-list, .slick-track').contents().unwrap();
-				$thumbnails.find('.slick-list, .slick-track').contents().unwrap();
-				
-				// Remove Slick arrows and dots that might be outside
-				$gallery.siblings('.slick-arrow, .slick-dots').remove();
-				$thumbnails.siblings('.slick-arrow, .slick-dots').remove();
-			} catch (e) {
-				// Silently fail if Slick isn't initialized
-				console.log('Gallery cleanup: ', e);
-			}
-		},
-
-		/**
-		 * Initialize Slick Carousel
-		 *
-		 * @since 1.0.0
-		 * @param {jQuery} $scope The widget wrapper element.
-		 * @param {jQuery} $gallery The gallery element.
-		 * @param {jQuery} $thumbnails The thumbnails element.
-		 * @return {void}
-		 */
-		initializeSlick: function ($scope, $gallery, $thumbnails) {
-			// Get Slick settings from data attribute
-			const slickSettings = $gallery.data('slick');
-			const hasLightbox = $gallery.data('lightbox') === 'yes';
-
-			if (!slickSettings) {
-				return;
-			}
-
-			// Default settings
-			const defaultSettings = {
-				prevArrow: '<button type="button" class="slick-prev bp-gallery-arrow"><i class="fa-solid fa-chevron-left"></i></button>',
-				nextArrow: '<button type="button" class="slick-next bp-gallery-arrow"><i class="fa-solid fa-chevron-right"></i></button>',
-				responsive: [
-					{
-						breakpoint: 768,
-						settings: {
-							slidesToShow: Math.min(slickSettings.slidesToShow, 2),
-							slidesToScroll: 1,
-							arrows: true,
-						}
-					},
-					{
-						breakpoint: 480,
-						settings: {
-							slidesToShow: 1,
-							slidesToScroll: 1,
-							arrows: true,
-							dots: false,
-						}
-					}
-				]
-			};
-
-			// Merge settings
-			const finalSettings = $.extend({}, defaultSettings, slickSettings);
-
-			try {
-				// Initialize main gallery
-				if ($thumbnails.length) {
-					// Get thumbnail settings from data attribute
-					const thumbSettings = $thumbnails.data('slick');
-					
-					if (!thumbSettings) {
-						// No thumbnail settings, just init gallery
-						$gallery.slick(finalSettings);
-						return;
-					}
-
-					// Gallery with thumbnail navigation
-					// Create unique IDs for proper asNavFor sync
-					const galleryId = 'bp-gallery-' + $scope.data('id');
-					const thumbsId = 'bp-gallery-thumbs-' + $scope.data('id');
-					
-					$gallery.attr('id', galleryId);
-					$thumbnails.attr('id', thumbsId);
-					
-					finalSettings.asNavFor = '#' + thumbsId;
-					thumbSettings.asNavFor = '#' + galleryId;
-					
-					// Initialize thumbnails first
-					$thumbnails.slick(thumbSettings);
-					
-					// Then initialize gallery
-					$gallery.slick(finalSettings);
-				} else {
-					// Gallery without thumbnails
-					$gallery.slick(finalSettings);
-				}
-			} catch (e) {
-				console.error('Gallery initialization error: ', e);
-			}
+			// Add more widget handlers here as you create them
 		}
 	};
 
@@ -507,7 +153,7 @@
 	});
 
 	// Make it globally accessible
-	window.BpWidgets = BpWidgets;
+	window.BpWidgets = window.BpWidgets || {};
+	$.extend(window.BpWidgets, BpWidgets);
 
 })(jQuery);
-

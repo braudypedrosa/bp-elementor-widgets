@@ -83,16 +83,37 @@ function compileSCSS() {
 
 /**
  * Compile JavaScript Task
- * Minifies JS files with sourcemaps
+ * Handles widget files separately (concatenated) and standalone files
  */
 function compileJS() {
-	return gulp.src(paths.js.src)
+	// Compile standalone JS files (admin, editor, frontend)
+	const standaloneFiles = gulp.src([
+		'src/js/admin.js',
+		'src/js/editor.js',
+		'src/js/frontend.js'
+	])
 		.pipe(sourcemaps.init())
 		.pipe(gulp.dest(paths.js.dest))
 		.pipe(rename({ suffix: '.min' }))
 		.pipe(uglify())
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest(paths.js.dest));
+
+	// Concatenate and compile widget files
+	// Order matters: widgets.js should come first, then individual widget files
+	const widgetFiles = gulp.src([
+		'src/js/widgets.js',
+		'src/js/widgets/**/*.js'
+	])
+		.pipe(sourcemaps.init())
+		.pipe(concat('widgets.js'))
+		.pipe(gulp.dest(paths.js.dest))
+		.pipe(rename({ suffix: '.min' }))
+		.pipe(uglify())
+		.pipe(sourcemaps.write('./'))
+		.pipe(gulp.dest(paths.js.dest));
+
+	return merge(standaloneFiles, widgetFiles);
 }
 
 /**
