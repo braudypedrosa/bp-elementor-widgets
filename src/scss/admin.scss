@@ -7,9 +7,9 @@
  * @since 1.0.0
  */
 
-// Import Variables and Mixins
-@import 'variables';
-@import 'mixins';
+// Load Variables and Mixins
+@use 'variables' as *;
+@use 'mixins' as *;
 
 // Settings Page Layout
 .bp-widgets-settings {

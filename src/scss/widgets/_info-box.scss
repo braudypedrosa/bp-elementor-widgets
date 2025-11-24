@@ -5,6 +5,9 @@
  * @since 1.0.0
  */
 
+@use '../variables' as *;
+@use '../mixins' as *;
+
 .bp-info-box {
 	position: relative;
 	display: flex;

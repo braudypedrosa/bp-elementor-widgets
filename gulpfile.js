@@ -67,7 +67,8 @@ function compileSCSS() {
 		.pipe(sourcemaps.init())
 		.pipe(sass({
 			outputStyle: 'expanded',
-			precision: 10
+			precision: 10,
+			silenceDeprecations: ['legacy-js-api']
 		}).on('error', sass.logError))
 		.pipe(autoprefixer({
 			cascade: false

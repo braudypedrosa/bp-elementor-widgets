@@ -5,6 +5,9 @@
  * @since 1.0.0
  */
 
+@use '../variables' as *;
+@use '../mixins' as *;
+
 .bp-countdown-timer {
 	display: flex;
 	align-items: center;
