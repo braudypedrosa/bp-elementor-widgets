@@ -129,7 +129,12 @@
 	@include gradient-primary;
 	border-radius: $border-radius-md;
 	color: #ffffff;
-	font-size: $font-size-xlarge;
+	
+	.dashicons {
+		font-size: 28px;
+		width: 28px;
+		height: 28px;
+	}
 }
 
 // Widget Toggle Switch
@@ -344,8 +349,3 @@
 		}
 	}
 }
-
-// Font Awesome Support
-// Note: Font Awesome 6 Free is loaded from cdnjs CDN
-// Uses standard icon font implementation
-

@@ -55,7 +55,7 @@ class Settings {
 			'manage_options',
 			'bp-elementor-widgets',
 			array( $this, 'render_settings_page' ),
-			'data:image/svg+xml;base64,' . base64_encode( '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="black"><path d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM64 160H224v96H64V160zm0 160H224v96H64V320zM288 160H448v96H288V160zm0 160H448v96H288V320z"/></svg>' ),
+			'dashicons-layout',
 			59
 		);
 	}
@@ -133,14 +133,6 @@ class Settings {
 			BP_ELEMENTOR_WIDGETS_URL . 'dist/css/admin.min.css',
 			array(),
 			BP_ELEMENTOR_WIDGETS_VERSION
-		);
-
-		// Enqueue Font Awesome for admin.
-		wp_enqueue_style(
-			'bp-font-awesome',
-			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
-			array(),
-			'6.5.1'
 		);
 
 		// Enqueue admin scripts.
@@ -252,22 +244,22 @@ class Settings {
 						foreach ( $available_widgets as $widget_key => $widget_data ) {
 							$is_enabled = in_array( $widget_key, $enabled_widgets, true );
 							
-							// Map Elementor icons to Font Awesome.
+							// Map Elementor icons to WordPress Dashicons.
 							$icon_map = array(
-								'eicon-info-box'     => 'fa-solid fa-circle-info',
-								'eicon-countdown'    => 'fa-solid fa-clock',
-								'eicon-gallery-grid' => 'fa-solid fa-images',
-								'eicon-price-table'  => 'fa-solid fa-table',
-								'eicon-plug'         => 'fa-solid fa-plug',
+								'eicon-info-box'     => 'dashicons-info',
+								'eicon-countdown'    => 'dashicons-clock',
+								'eicon-gallery-grid' => 'dashicons-images-alt2',
+								'eicon-price-table'  => 'dashicons-table-col-after',
+								'eicon-plug'         => 'dashicons-admin-plugins',
 							);
 							
 							$eicon = isset( $widget_data['icon'] ) ? $widget_data['icon'] : 'eicon-plug';
-							$icon = isset( $icon_map[ $eicon ] ) ? $icon_map[ $eicon ] : 'fa-solid fa-puzzle-piece';
+							$icon = isset( $icon_map[ $eicon ] ) ? $icon_map[ $eicon ] : 'dashicons-screenoptions';
 							?>
 							<div class="bp-widget-card <?php echo $is_enabled ? 'active' : ''; ?>" data-widget="<?php echo esc_attr( $widget_key ); ?>">
 								<div class="bp-widget-header">
 									<div class="bp-widget-icon">
-										<i class="<?php echo esc_attr( $icon ); ?>"></i>
+										<span class="dashicons <?php echo esc_attr( $icon ); ?>"></span>
 									</div>
 									<div class="bp-widget-toggle">
 										<label class="bp-switch">
