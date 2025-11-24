@@ -12,69 +12,63 @@
 	'use strict';
 
 	/**
+	 * Ensure BpWidgets namespace exists
+	 */
+	window.BpWidgets = window.BpWidgets || {};
+
+	/**
 	 * Main Widgets Handler
 	 *
 	 * Handles initialization of all widget-specific functionality.
 	 *
 	 * @since 1.0.0
 	 */
-	const BpWidgets = {
-
-		/**
-		 * Initialize
-		 *
-		 * Initialize all widget handlers when Elementor is ready.
-		 *
-		 * @since 1.0.0
-		 * @return {void}
-		 */
-		init: function () {
-			// Check if Elementor frontend is already initialized
-			if (typeof elementorFrontend !== 'undefined' && elementorFrontend.hooks) {
-				BpWidgets.registerWidgets();
-			} else {
-				// Wait for Elementor frontend to be ready
-				$(window).on('elementor/frontend/init', function () {
-					BpWidgets.registerWidgets();
-				});
-			}
-		},
-
-		/**
-		 * Register Widgets
-		 *
-		 * Register handlers for all widgets.
-		 *
-		 * @since 1.0.0
-		 * @return {void}
-		 */
-		registerWidgets: function () {
-			// Info Box Widget
-			if (BpWidgets.InfoBox) {
-				elementorFrontend.hooks.addAction(
-					'frontend/element_ready/bp-info-box.default',
-					BpWidgets.InfoBox.init
-				);
-			}
-
-			// Countdown Timer Widget
-			if (BpWidgets.CountdownTimer) {
-				elementorFrontend.hooks.addAction(
-					'frontend/element_ready/bp-countdown-timer.default',
-					BpWidgets.CountdownTimer.init
-				);
-			}
-
-			// Gallery Widget
-			if (BpWidgets.Gallery) {
-				elementorFrontend.hooks.addAction(
-					'frontend/element_ready/bp-gallery.default',
-					BpWidgets.Gallery.init
-				);
-			}
-
-			// Add more widget handlers here as you create them
+	window.BpWidgets.init = function () {
+		// Check if Elementor frontend is already initialized
+		if (typeof elementorFrontend !== 'undefined' && elementorFrontend.hooks) {
+			window.BpWidgets.registerWidgets();
+		} else {
+			// Wait for Elementor frontend to be ready
+			$(window).on('elementor/frontend/init', function () {
+				window.BpWidgets.registerWidgets();
+			});
 		}
+	};
+
+	/**
+	 * Register Widgets
+	 *
+	 * Register handlers for all widgets.
+	 *
+	 * @since 1.0.0
+	 * @return {void}
+	 */
+	window.BpWidgets.registerWidgets = function () {
+		// Info Box Widget
+		if (window.BpWidgets.InfoBox) {
+			elementorFrontend.hooks.addAction(
+				'frontend/element_ready/bp-info-box.default',
+				window.BpWidgets.InfoBox.init
+			);
+		}
+
+		// Countdown Timer Widget
+		if (window.BpWidgets.CountdownTimer) {
+			elementorFrontend.hooks.addAction(
+				'frontend/element_ready/bp-countdown-timer.default',
+				window.BpWidgets.CountdownTimer.init
+			);
+		}
+
+		// Gallery Widget
+		if (window.BpWidgets.Gallery) {
+			elementorFrontend.hooks.addAction(
+				'frontend/element_ready/bp-gallery.default',
+				window.BpWidgets.Gallery.init
+			);
+		}
+
+		// Add more widget handlers here as you create them
 	};
 
 	/**
@@ -82,7 +76,7 @@
 	 *
 	 * @since 1.0.0
 	 */
-	BpWidgets.Utils = {
+	window.BpWidgets.Utils = {
 
 		/**
 		 * Pad Number
@@ -149,11 +143,7 @@
 
 	// Initialize when DOM is ready
 	$(document).ready(function () {
-		BpWidgets.init();
+		window.BpWidgets.init();
 	});
-
-	// Make it globally accessible
-	window.BpWidgets = window.BpWidgets || {};
-	$.extend(window.BpWidgets, BpWidgets);
 
 })(jQuery);

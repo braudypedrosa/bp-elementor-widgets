@@ -5,8 +5,11 @@
  * @since 1.0.0
  */
 
-// Ensure BpWidgets namespace exists
-window.BpWidgets = window.BpWidgets || {};
+(function ($) {
+	'use strict';
+
+	// Ensure BpWidgets namespace exists
+	window.BpWidgets = window.BpWidgets || {};
 
 window.BpWidgets.CountdownTimer = {
 
@@ -178,3 +181,5 @@ window.BpWidgets.CountdownTimer = {
 		$timer.trigger('bpCountdownFinished');
 	}
 };
+
+})(jQuery);
