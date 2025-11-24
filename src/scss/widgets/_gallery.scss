@@ -31,16 +31,31 @@
 	position: relative;
 	outline: none;
 	
+	// Aspect ratio container
+	&::before {
+		content: '';
+		display: block;
+		padding-bottom: 56.25%; // Default 16:9 ratio
+	}
+	
 	img {
+		position: absolute;
+		top: 0;
+		left: 0;
 		width: 100%;
-		height: auto;
+		height: 100%;
+		object-fit: cover;
 		display: block;
 		@include transition(all);
 	}
 	
 	a {
 		display: block;
-		position: relative;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
 		overflow: hidden;
 		
 		&:hover img {
@@ -141,38 +156,82 @@
 	}
 }
 
-// Thumbnail Navigation Layout
+// Aspect Ratios
+.bp-gallery-ratio-1-1 .bp-gallery-item::before {
+	padding-bottom: 100%; // 1:1
+}
+
+.bp-gallery-ratio-3-2 .bp-gallery-item::before {
+	padding-bottom: 66.67%; // 3:2
+}
+
+.bp-gallery-ratio-4-3 .bp-gallery-item::before {
+	padding-bottom: 75%; // 4:3
+}
+
+.bp-gallery-ratio-16-9 .bp-gallery-item::before {
+	padding-bottom: 56.25%; // 16:9
+}
+
+.bp-gallery-ratio-21-9 .bp-gallery-item::before {
+	padding-bottom: 42.86%; // 21:9
+}
+
+// Thumbnail Navigation Layout - Overlay Style
 .bp-gallery-layout-thumbnail {
+	.bp-gallery-container {
+		position: relative;
+	}
+	
 	.bp-gallery {
-		margin-bottom: $spacing-md;
+		margin-bottom: 0;
 	}
 }
 
 .bp-gallery-thumbnails {
-	position: relative;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
+	padding: 40px 60px 20px;
 	
 	.bp-gallery-thumb-item {
 		padding: 0 5px;
 		cursor: pointer;
 		outline: none;
 		@include transition(all);
+		position: relative;
+		
+		&::before {
+			content: '';
+			display: block;
+			padding-bottom: 66.67%; // 3:2 ratio for thumbnails
+		}
 		
 		img {
+			position: absolute;
+			top: 0;
+			left: 0;
 			width: 100%;
-			height: auto;
+			height: 100%;
+			object-fit: cover;
 			display: block;
 			border-radius: $border-radius-sm;
-			opacity: 0.6;
+			opacity: 0.5;
 			@include transition(all);
+			border: 3px solid transparent;
 		}
 		
-		&:hover img,
+		&:hover img {
+			opacity: 0.8;
+		}
+		
 		&.slick-current img {
 			opacity: 1;
-		}
-		
-		&.slick-current img {
-			border: 2px solid $color-secondary;
+			border-color: #ffffff;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 		}
 	}
 }
@@ -214,8 +273,14 @@
 	}
 	
 	.bp-gallery-thumbnails {
+		padding: 30px 40px 15px;
+		
 		.slick-slide {
 			padding: 0 3px;
+		}
+		
+		.bp-gallery-thumb-item img {
+			border-width: 2px;
 		}
 	}
 }
@@ -240,8 +305,10 @@
 		height: 8px !important;
 	}
 	
-	.bp-gallery-thumbnails {
-		display: none !important; // Hide thumbnails on mobile
+	.bp-gallery-layout-thumbnail {
+		.bp-gallery-thumbnails {
+			display: none !important; // Hide thumbnails on mobile
+		}
 	}
 }
 

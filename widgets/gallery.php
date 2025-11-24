@@ -141,6 +141,48 @@ class Gallery extends Base_Widget {
 		);
 
 		$this->add_control(
+			'image_ratio',
+			array(
+				'label'   => esc_html__( 'Image Ratio', 'bp-elementor-widgets' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => '16-9',
+				'options' => array(
+					'1-1'   => esc_html__( '1:1', 'bp-elementor-widgets' ),
+					'3-2'   => esc_html__( '3:2', 'bp-elementor-widgets' ),
+					'4-3'   => esc_html__( '4:3', 'bp-elementor-widgets' ),
+					'16-9'  => esc_html__( '16:9', 'bp-elementor-widgets' ),
+					'21-9'  => esc_html__( '21:9', 'bp-elementor-widgets' ),
+					'custom' => esc_html__( 'Custom', 'bp-elementor-widgets' ),
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'image_ratio_custom',
+			array(
+				'label'      => esc_html__( 'Custom Ratio', 'bp-elementor-widgets' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( '%' ),
+				'range'      => array(
+					'%' => array(
+						'min' => 10,
+						'max' => 200,
+					),
+				),
+				'default'    => array(
+					'unit' => '%',
+					'size' => 56.25, // 16:9 ratio
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .bp-gallery-item::before' => 'padding-bottom: {{SIZE}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'image_ratio' => 'custom',
+				),
+			)
+		);
+
+		$this->add_control(
 			'gallery_layout',
 			array(
 				'label'   => esc_html__( 'Layout', 'bp-elementor-widgets' ),
@@ -652,6 +694,7 @@ class Gallery extends Base_Widget {
 
 		$this->add_render_attribute( 'wrapper', 'class', 'bp-gallery' );
 		$this->add_render_attribute( 'wrapper', 'class', 'bp-gallery-layout-' . $settings['gallery_layout'] );
+		$this->add_render_attribute( 'wrapper', 'class', 'bp-gallery-ratio-' . $settings['image_ratio'] );
 		$this->add_render_attribute( 'wrapper', 'data-slick', wp_json_encode( $slick_settings ) );
 
 		if ( 'yes' === $settings['open_lightbox'] ) {
