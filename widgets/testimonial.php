@@ -232,9 +232,24 @@ class Testimonial extends Base_Widget {
 		$this->add_responsive_control(
 			'columns',
 			array(
-				'label'     => esc_html__( 'Columns', 'bp-elementor-widgets' ),
+				'label'   => esc_html__( 'Columns', 'bp-elementor-widgets' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => '3',
+				'options' => array(
+					'1' => '1',
+					'2' => '2',
+					'3' => '3',
+					'4' => '4',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'slides_to_show',
+			array(
+				'label'     => esc_html__( 'Slides to Show', 'bp-elementor-widgets' ),
 				'type'      => Controls_Manager::SELECT,
-				'default'   => '3',
+				'default'   => '1',
 				'options'   => array(
 					'1' => '1',
 					'2' => '2',
@@ -242,7 +257,7 @@ class Testimonial extends Base_Widget {
 					'4' => '4',
 				),
 				'condition' => array(
-					'layout' => 'grid',
+					'layout' => 'slider',
 				),
 			)
 		);
@@ -551,19 +566,20 @@ class Testimonial extends Base_Widget {
 
 		if ( 'slider' === $layout ) {
 			$this->add_render_attribute( 'wrapper', 'class', 'bp-testimonial-slider' );
+			$slides_to_show = ! empty( $settings['slides_to_show'] ) ? absint( $settings['slides_to_show'] ) : 1;
 			$this->add_render_attribute(
 				'wrapper',
 				'data-slick',
 				wp_json_encode(
 					array(
-						'slidesToShow'  => 1,
+						'slidesToShow'   => $slides_to_show,
 						'slidesToScroll' => 1,
-						'autoplay'      => 'yes' === $settings['autoplay'],
-						'autoplaySpeed' => absint( $settings['autoplay_speed'] ),
-						'arrows'        => 'yes' === $settings['show_arrows'],
-						'dots'          => 'yes' === $settings['show_dots'],
-						'infinite'      => true,
-						'speed'         => 500,
+						'autoplay'       => 'yes' === $settings['autoplay'],
+						'autoplaySpeed'  => absint( $settings['autoplay_speed'] ),
+						'arrows'         => 'yes' === $settings['show_arrows'],
+						'dots'           => 'yes' === $settings['show_dots'],
+						'infinite'       => true,
+						'speed'          => 500,
 					)
 				)
 			);

@@ -39,17 +39,33 @@
 				return;
 			}
 
-			// Default settings
-			const defaultSettings = {
-				prevArrow: '<button type="button" class="slick-prev bp-testimonial-arrow"><i class="fa-solid fa-chevron-left"></i></button>',
-				nextArrow: '<button type="button" class="slick-next bp-testimonial-arrow"><i class="fa-solid fa-chevron-right"></i></button>',
-			};
+		// Default settings
+		const defaultSettings = {
+			prevArrow: '<button type="button" class="slick-prev bp-testimonial-arrow"><i class="fa-solid fa-chevron-left"></i></button>',
+			nextArrow: '<button type="button" class="slick-next bp-testimonial-arrow"><i class="fa-solid fa-chevron-right"></i></button>',
+			responsive: [
+				{
+					breakpoint: 768,
+					settings: {
+						slidesToShow: Math.min(slickSettings.slidesToShow, 2),
+						slidesToScroll: 1,
+					}
+				},
+				{
+					breakpoint: 480,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1,
+					}
+				}
+			]
+		};
 
-			// Merge settings
-			const finalSettings = $.extend({}, defaultSettings, slickSettings);
+		// Merge settings
+		const finalSettings = $.extend({}, defaultSettings, slickSettings);
 
-			// Initialize slider
-			$slider.slick(finalSettings);
+		// Initialize slider
+		$slider.slick(finalSettings);
 		}
 	};
 

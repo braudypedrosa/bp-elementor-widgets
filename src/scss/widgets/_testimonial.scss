@@ -29,7 +29,6 @@
 
 	&:hover {
 		@include box-shadow;
-		transform: translateY(-5px);
 	}
 }
 
@@ -170,6 +169,11 @@
 
 	.slick-slide {
 		outline: none;
+		height: inherit;
+
+		> div {
+			height: 100%;
+		}
 	}
 
 	.slick-list {
@@ -178,6 +182,18 @@
 
 	.slick-slide > div {
 		padding: 0 10px;
+	}
+
+	.slick-track {
+		display: flex;
+		align-items: stretch;
+	}
+
+	// Make sure items take full height
+	.bp-testimonial-item {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
 	}
 }
 
