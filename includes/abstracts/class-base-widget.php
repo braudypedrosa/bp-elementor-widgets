@@ -52,7 +52,7 @@ abstract class Base_Widget extends Widget_Base {
 	 * @return array Widget keywords.
 	 */
 	public function get_keywords() {
-		return array( 'bub' );
+		return array( 'bp' );
 	}
 
 	/**

@@ -127,6 +127,9 @@ class Widgets_Manager {
 	 * @return void
 	 */
 	public function register_widgets( $widgets_manager ) {
+		// Load the abstract widget class (after Elementor is loaded).
+		require_once BP_ELEMENTOR_WIDGETS_PATH . 'includes/abstracts/class-base-widget.php';
+
 		// Get enabled widgets from settings.
 		$enabled_widgets = get_option( 'bp_elementor_enabled_widgets', array_keys( $this->available_widgets ) );
 

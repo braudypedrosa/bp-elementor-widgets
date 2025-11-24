@@ -105,8 +105,8 @@ final class Plugin {
 		// Load the settings class.
 		require_once BP_ELEMENTOR_WIDGETS_PATH . 'includes/class-settings.php';
 
-		// Load the abstract widget class.
-		require_once BP_ELEMENTOR_WIDGETS_PATH . 'includes/abstracts/class-base-widget.php';
+		// Note: The abstract widget class is loaded in the Widgets_Manager
+		// when needed, after Elementor's classes are available.
 	}
 
 	/**
