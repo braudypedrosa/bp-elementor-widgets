@@ -295,6 +295,7 @@
 		 * @return {void}
 		 */
 		init: function ($scope) {
+			const $container = $scope.find('.bp-gallery-container');
 			const $gallery = $scope.find('.bp-gallery');
 			const $thumbnails = $scope.find('.bp-gallery-thumbnails');
 
@@ -302,78 +303,131 @@
 				return;
 			}
 
-			// Destroy existing Slick instances if they exist (for Elementor editor)
-			if ($gallery.hasClass('slick-initialized')) {
-				$gallery.slick('unslick');
-			}
-			if ($thumbnails.length && $thumbnails.hasClass('slick-initialized')) {
-				$thumbnails.slick('unslick');
-			}
+			// Completely destroy and clean up existing Slick instances
+			BpWidgets.Gallery.destroy($gallery, $thumbnails);
 
+			// Use requestAnimationFrame for smoother re-initialization
+			requestAnimationFrame(function() {
+				BpWidgets.Gallery.initializeSlick($scope, $gallery, $thumbnails);
+			});
+		},
+
+		/**
+		 * Destroy Slick Instances
+		 *
+		 * @since 1.0.0
+		 * @param {jQuery} $gallery The gallery element.
+		 * @param {jQuery} $thumbnails The thumbnails element.
+		 * @return {void}
+		 */
+		destroy: function ($gallery, $thumbnails) {
+			try {
+				// Remove all Slick-generated elements and classes
+				if ($gallery.hasClass('slick-initialized')) {
+					$gallery.slick('unslick');
+				}
+				if ($thumbnails.length && $thumbnails.hasClass('slick-initialized')) {
+					$thumbnails.slick('unslick');
+				}
+
+				// Clean up any remaining Slick artifacts
+				$gallery.removeClass('slick-slider slick-initialized').removeAttr('style');
+				$thumbnails.removeClass('slick-slider slick-initialized').removeAttr('style');
+				
+				// Remove any leftover Slick elements
+				$gallery.find('.slick-list, .slick-track').contents().unwrap();
+				$thumbnails.find('.slick-list, .slick-track').contents().unwrap();
+				
+				// Remove Slick arrows and dots that might be outside
+				$gallery.siblings('.slick-arrow, .slick-dots').remove();
+				$thumbnails.siblings('.slick-arrow, .slick-dots').remove();
+			} catch (e) {
+				// Silently fail if Slick isn't initialized
+				console.log('Gallery cleanup: ', e);
+			}
+		},
+
+		/**
+		 * Initialize Slick Carousel
+		 *
+		 * @since 1.0.0
+		 * @param {jQuery} $scope The widget wrapper element.
+		 * @param {jQuery} $gallery The gallery element.
+		 * @param {jQuery} $thumbnails The thumbnails element.
+		 * @return {void}
+		 */
+		initializeSlick: function ($scope, $gallery, $thumbnails) {
 			// Get Slick settings from data attribute
 			const slickSettings = $gallery.data('slick');
 			const hasLightbox = $gallery.data('lightbox') === 'yes';
 
-			// Wait a brief moment for DOM to settle after unslick
-			setTimeout(function() {
-				// Default settings
-				const defaultSettings = {
-					prevArrow: '<button type="button" class="slick-prev bp-gallery-arrow"><i class="fa-solid fa-chevron-left"></i></button>',
-					nextArrow: '<button type="button" class="slick-next bp-gallery-arrow"><i class="fa-solid fa-chevron-right"></i></button>',
-					responsive: [
-						{
-							breakpoint: 768,
-							settings: {
-								slidesToShow: Math.min(slickSettings.slidesToShow, 2),
-								slidesToScroll: 1,
-								arrows: true,
-							}
-						},
-						{
-							breakpoint: 480,
-							settings: {
-								slidesToShow: 1,
-								slidesToScroll: 1,
-								arrows: true,
-								dots: false,
-							}
+			if (!slickSettings) {
+				return;
+			}
+
+			// Default settings
+			const defaultSettings = {
+				prevArrow: '<button type="button" class="slick-prev bp-gallery-arrow"><i class="fa-solid fa-chevron-left"></i></button>',
+				nextArrow: '<button type="button" class="slick-next bp-gallery-arrow"><i class="fa-solid fa-chevron-right"></i></button>',
+				responsive: [
+					{
+						breakpoint: 768,
+						settings: {
+							slidesToShow: Math.min(slickSettings.slidesToShow, 2),
+							slidesToScroll: 1,
+							arrows: true,
 						}
-					]
-				};
+					},
+					{
+						breakpoint: 480,
+						settings: {
+							slidesToShow: 1,
+							slidesToScroll: 1,
+							arrows: true,
+							dots: false,
+						}
+					}
+				]
+			};
 
-				// Merge settings
-				const finalSettings = $.extend({}, defaultSettings, slickSettings);
+			// Merge settings
+			const finalSettings = $.extend({}, defaultSettings, slickSettings);
 
+			try {
 				// Initialize main gallery
 				if ($thumbnails.length) {
-					// Gallery with thumbnail navigation
-					// Use specific selector within this widget scope
-					finalSettings.asNavFor = $thumbnails;
-					
 					// Get thumbnail settings from data attribute
 					const thumbSettings = $thumbnails.data('slick');
 					
-					// Prepare thumbnail settings
-					const thumbFinalSettings = thumbSettings ? $.extend({}, thumbSettings, {
-						asNavFor: $gallery
-					}) : {
-						asNavFor: $gallery
-					};
+					if (!thumbSettings) {
+						// No thumbnail settings, just init gallery
+						$gallery.slick(finalSettings);
+						return;
+					}
+
+					// Gallery with thumbnail navigation
+					// Create unique IDs for proper asNavFor sync
+					const galleryId = 'bp-gallery-' + $scope.data('id');
+					const thumbsId = 'bp-gallery-thumbs-' + $scope.data('id');
 					
-					// Initialize both carousels
+					$gallery.attr('id', galleryId);
+					$thumbnails.attr('id', thumbsId);
+					
+					finalSettings.asNavFor = '#' + thumbsId;
+					thumbSettings.asNavFor = '#' + galleryId;
+					
+					// Initialize thumbnails first
+					$thumbnails.slick(thumbSettings);
+					
+					// Then initialize gallery
 					$gallery.slick(finalSettings);
-					$thumbnails.slick(thumbFinalSettings);
 				} else {
 					// Gallery without thumbnails
 					$gallery.slick(finalSettings);
 				}
-
-				// Handle lightbox (Elementor handles it automatically)
-				if (hasLightbox) {
-					// Elementor's lightbox will be automatically triggered
-					// No additional code needed
-				}
-			}, 100);
+			} catch (e) {
+				console.error('Gallery initialization error: ', e);
+			}
 		}
 	};
 
