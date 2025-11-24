@@ -196,6 +196,23 @@ class Gallery extends Base_Widget {
 		);
 
 		$this->add_control(
+			'thumbnail_size',
+			array(
+				'label'     => esc_html__( 'Thumbnail Size', 'bp-elementor-widgets' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'medium',
+				'options'   => array(
+					'small'  => esc_html__( 'Small (8 per slide)', 'bp-elementor-widgets' ),
+					'medium' => esc_html__( 'Medium (7 per slide)', 'bp-elementor-widgets' ),
+					'large'  => esc_html__( 'Large (6 per slide)', 'bp-elementor-widgets' ),
+				),
+				'condition' => array(
+					'gallery_layout' => 'thumbnail',
+				),
+			)
+		);
+
+		$this->add_control(
 			'open_lightbox',
 			array(
 				'label'   => esc_html__( 'Lightbox', 'bp-elementor-widgets' ),
@@ -700,6 +717,12 @@ class Gallery extends Base_Widget {
 		if ( 'yes' === $settings['open_lightbox'] ) {
 			$this->add_render_attribute( 'wrapper', 'data-lightbox', 'yes' );
 		}
+
+		// Add thumbnail size data attribute for JavaScript.
+		if ( 'thumbnail' === $settings['gallery_layout'] ) {
+			$thumb_size = isset( $settings['thumbnail_size'] ) ? $settings['thumbnail_size'] : 'medium';
+			$this->add_render_attribute( 'wrapper', 'data-thumbnail-size', $thumb_size );
+		}
 		?>
 
 		<div class="bp-gallery-container">
@@ -732,8 +755,16 @@ class Gallery extends Base_Widget {
 				?>
 			</div>
 
-			<?php if ( 'thumbnail' === $settings['gallery_layout'] ) : ?>
-				<div class="bp-gallery-thumbnails" data-slick='{"slidesToShow": 5, "slidesToScroll": 1, "asNavFor": ".bp-gallery", "focusOnSelect": true, "arrows": false, "dots": false, "centerMode": true, "centerPadding": "0"}'>
+			<?php if ( 'thumbnail' === $settings['gallery_layout'] ) : 
+				$thumb_size = isset( $settings['thumbnail_size'] ) ? $settings['thumbnail_size'] : 'medium';
+				$slides_map = array(
+					'small'  => 8,
+					'medium' => 7,
+					'large'  => 6,
+				);
+				$slides_to_show = isset( $slides_map[ $thumb_size ] ) ? $slides_map[ $thumb_size ] : 7;
+				?>
+				<div class="bp-gallery-thumbnails bp-gallery-thumbnails-<?php echo esc_attr( $thumb_size ); ?>" data-slick='{"slidesToShow": <?php echo absint( $slides_to_show ); ?>, "slidesToScroll": 1, "asNavFor": ".bp-gallery", "focusOnSelect": true, "arrows": false, "dots": false, "centerMode": true, "centerPadding": "0"}'>
 					<?php
 					foreach ( $gallery as $image ) {
 						$thumb_url = wp_get_attachment_image_url( $image['id'], 'thumbnail' );
