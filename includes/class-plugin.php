@@ -1,0 +1,228 @@
+<?php
+/**
+ * Main Plugin Class
+ *
+ * The main class that initiates and runs the plugin.
+ *
+ * @package BUB_Elementor_Widgets
+ * @since 1.0.0
+ */
+
+namespace BUB_Elementor_Widgets;
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Main Plugin Class
+ *
+ * This class handles the initialization of all plugin components.
+ *
+ * @since 1.0.0
+ */
+final class Plugin {
+
+	/**
+	 * Instance
+	 *
+	 * Holds the single instance of this class.
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 * @static
+	 * @var Plugin
+	 */
+	private static $_instance = null;
+
+	/**
+	 * Widgets Manager
+	 *
+	 * Holds the widgets manager instance.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @var Widgets_Manager
+	 */
+	public $widgets_manager;
+
+	/**
+	 * Settings
+	 *
+	 * Holds the settings instance.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @var Settings
+	 */
+	public $settings;
+
+	/**
+	 * Instance
+	 *
+	 * Ensures only one instance of the class is loaded or can be loaded.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @static
+	 * @return Plugin An instance of the class.
+	 */
+	public static function instance() {
+		if ( is_null( self::$_instance ) ) {
+			self::$_instance = new self();
+		}
+		return self::$_instance;
+	}
+
+	/**
+	 * Constructor
+	 *
+	 * Initialize the plugin by hooking into Elementor.
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 */
+	private function __construct() {
+		$this->load_dependencies();
+		$this->init_components();
+		$this->register_hooks();
+	}
+
+	/**
+	 * Load Dependencies
+	 *
+	 * Load required plugin files.
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 * @return void
+	 */
+	private function load_dependencies() {
+		// Load the widgets manager.
+		require_once BUB_ELEMENTOR_WIDGETS_PATH . 'includes/class-widgets-manager.php';
+
+		// Load the settings class.
+		require_once BUB_ELEMENTOR_WIDGETS_PATH . 'includes/class-settings.php';
+
+		// Load the abstract widget class.
+		require_once BUB_ELEMENTOR_WIDGETS_PATH . 'includes/abstracts/class-base-widget.php';
+	}
+
+	/**
+	 * Initialize Components
+	 *
+	 * Initialize plugin components.
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 * @return void
+	 */
+	private function init_components() {
+		// Initialize settings.
+		$this->settings = new Settings();
+
+		// Initialize widgets manager.
+		$this->widgets_manager = new Widgets_Manager();
+	}
+
+	/**
+	 * Register Hooks
+	 *
+	 * Register all WordPress hooks.
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 * @return void
+	 */
+	private function register_hooks() {
+		// Register widget styles.
+		add_action( 'elementor/frontend/after_enqueue_styles', array( $this, 'enqueue_frontend_styles' ) );
+
+		// Register widget scripts.
+		add_action( 'elementor/frontend/after_register_scripts', array( $this, 'enqueue_frontend_scripts' ) );
+
+		// Register editor scripts.
+		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'enqueue_editor_scripts' ) );
+
+		// Register custom widget categories.
+		add_action( 'elementor/elements/categories_registered', array( $this, 'register_widget_categories' ) );
+	}
+
+	/**
+	 * Enqueue Frontend Styles
+	 *
+	 * Load CSS files for the frontend.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function enqueue_frontend_styles() {
+		wp_enqueue_style(
+			'bub-elementor-widgets',
+			BUB_ELEMENTOR_WIDGETS_URL . 'assets/css/frontend.css',
+			array(),
+			BUB_ELEMENTOR_WIDGETS_VERSION
+		);
+	}
+
+	/**
+	 * Enqueue Frontend Scripts
+	 *
+	 * Load JavaScript files for the frontend.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function enqueue_frontend_scripts() {
+		wp_register_script(
+			'bub-elementor-widgets',
+			BUB_ELEMENTOR_WIDGETS_URL . 'assets/js/frontend.js',
+			array( 'jquery' ),
+			BUB_ELEMENTOR_WIDGETS_VERSION,
+			true
+		);
+	}
+
+	/**
+	 * Enqueue Editor Scripts
+	 *
+	 * Load JavaScript files for the Elementor editor.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function enqueue_editor_scripts() {
+		wp_enqueue_script(
+			'bub-elementor-widgets-editor',
+			BUB_ELEMENTOR_WIDGETS_URL . 'assets/js/editor.js',
+			array( 'jquery' ),
+			BUB_ELEMENTOR_WIDGETS_VERSION,
+			true
+		);
+	}
+
+	/**
+	 * Register Widget Categories
+	 *
+	 * Register custom widget categories for organizing widgets in Elementor.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @param \Elementor\Elements_Manager $elements_manager Elementor elements manager.
+	 * @return void
+	 */
+	public function register_widget_categories( $elements_manager ) {
+		$elements_manager->add_category(
+			'bub-widgets',
+			array(
+				'title' => esc_html__( 'BUB Widgets', 'bub-elementor-widgets' ),
+				'icon'  => 'fa fa-plug',
+			)
+		);
+	}
+}
+

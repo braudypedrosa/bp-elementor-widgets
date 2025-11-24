@@ -1,0 +1,422 @@
+/**
+ * Admin Styles
+ *
+ * Styles for the BUB Elementor Widgets settings page in WordPress admin.
+ *
+ * @package BUB_Elementor_Widgets
+ * @since 1.0.0
+ */
+
+/* ==========================================================================
+   Settings Page Layout
+   ========================================================================== */
+
+.bub-widgets-settings {
+	margin: 20px 20px 0 0;
+}
+
+.bub-settings-container {
+	max-width: 1400px;
+	background: #ffffff;
+	border: 1px solid #dcdcdc;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+	margin-top: 20px;
+}
+
+/* ==========================================================================
+   Header Section
+   ========================================================================== */
+
+.bub-settings-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 30px;
+	border-bottom: 1px solid #e5e5e5;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: #ffffff;
+}
+
+.bub-header-content h2 {
+	margin: 0 0 8px 0;
+	font-size: 28px;
+	font-weight: 600;
+	color: #ffffff;
+}
+
+.bub-header-content .description {
+	margin: 0;
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.9);
+	max-width: 600px;
+}
+
+.bub-header-actions {
+	display: flex;
+	gap: 10px;
+}
+
+.bub-header-actions .button {
+	background: rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	color: #ffffff;
+	text-shadow: none;
+	padding: 8px 16px;
+	height: auto;
+	transition: all 0.3s ease;
+}
+
+.bub-header-actions .button:hover {
+	background: rgba(255, 255, 255, 0.3);
+	border-color: rgba(255, 255, 255, 0.5);
+	color: #ffffff;
+}
+
+/* ==========================================================================
+   Widgets Grid
+   ========================================================================== */
+
+.bub-widgets-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+	gap: 20px;
+	padding: 30px;
+}
+
+.bub-no-widgets {
+	grid-column: 1 / -1;
+	text-align: center;
+	padding: 60px 20px;
+	color: #666;
+	font-size: 16px;
+}
+
+/* ==========================================================================
+   Widget Cards
+   ========================================================================== */
+
+.bub-widget-card {
+	position: relative;
+	background: #ffffff;
+	border: 2px solid #e5e5e5;
+	border-radius: 8px;
+	padding: 20px;
+	transition: all 0.3s ease;
+	opacity: 0.7;
+}
+
+.bub-widget-card:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.bub-widget-card.active {
+	border-color: #667eea;
+	opacity: 1;
+	background: linear-gradient(to bottom right, #ffffff 0%, #f9f9ff 100%);
+}
+
+.bub-widget-card.active::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+	border-radius: 8px 8px 0 0;
+}
+
+/* Widget Card Header */
+.bub-widget-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 15px;
+}
+
+.bub-widget-icon {
+	width: 50px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	border-radius: 8px;
+	color: #ffffff;
+	font-size: 24px;
+	transition: all 0.3s ease;
+}
+
+.bub-widget-card.active .bub-widget-icon {
+	transform: scale(1.05);
+	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* Widget Toggle Switch */
+.bub-widget-toggle {
+	flex-shrink: 0;
+}
+
+.bub-switch {
+	position: relative;
+	display: inline-block;
+	width: 50px;
+	height: 26px;
+}
+
+.bub-switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.bub-slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	transition: 0.4s;
+	border-radius: 26px;
+}
+
+.bub-slider:before {
+	position: absolute;
+	content: "";
+	height: 20px;
+	width: 20px;
+	left: 3px;
+	bottom: 3px;
+	background-color: white;
+	transition: 0.4s;
+	border-radius: 50%;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .bub-slider {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+input:checked + .bub-slider:before {
+	transform: translateX(24px);
+}
+
+/* Widget Card Body */
+.bub-widget-body {
+	padding: 10px 0;
+}
+
+.bub-widget-title {
+	margin: 0 0 8px 0;
+	font-size: 18px;
+	font-weight: 600;
+	color: #23282d;
+	transition: color 0.3s ease;
+}
+
+.bub-widget-card.active .bub-widget-title {
+	color: #667eea;
+}
+
+.bub-widget-description {
+	margin: 0;
+	font-size: 14px;
+	line-height: 1.6;
+	color: #666;
+}
+
+/* Widget Card Footer */
+.bub-widget-footer {
+	margin-top: 15px;
+	padding-top: 15px;
+	border-top: 1px solid #e5e5e5;
+}
+
+.bub-demo-link {
+	display: inline-block;
+	font-size: 13px;
+	color: #667eea;
+	text-decoration: none;
+	font-weight: 500;
+	transition: color 0.3s ease;
+}
+
+.bub-demo-link:hover {
+	color: #764ba2;
+}
+
+.bub-demo-link::after {
+	content: ' →';
+	display: inline-block;
+	transition: transform 0.3s ease;
+}
+
+.bub-demo-link:hover::after {
+	transform: translateX(3px);
+}
+
+/* ==========================================================================
+   Settings Footer
+   ========================================================================== */
+
+.bub-settings-footer {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	padding: 25px 30px;
+	border-top: 1px solid #e5e5e5;
+	background: #f9f9f9;
+}
+
+.bub-save-settings {
+	padding: 10px 30px !important;
+	height: auto !important;
+	font-size: 16px !important;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+	border: none !important;
+	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+	transition: all 0.3s ease !important;
+}
+
+.bub-save-settings:hover {
+	transform: translateY(-2px) !important;
+	box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+}
+
+.bub-save-settings:active {
+	transform: translateY(0) !important;
+}
+
+.bub-save-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 14px;
+	font-weight: 500;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.bub-save-status.show {
+	opacity: 1;
+}
+
+.bub-save-status.success {
+	color: #46b450;
+}
+
+.bub-save-status.error {
+	color: #dc3232;
+}
+
+.bub-save-status::before {
+	content: '✓';
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	line-height: 18px;
+	text-align: center;
+	border-radius: 50%;
+	font-size: 12px;
+	background: currentColor;
+	color: #ffffff;
+}
+
+.bub-save-status.error::before {
+	content: '✕';
+}
+
+/* Loading State */
+.bub-save-settings.loading {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+.bub-save-settings.loading::after {
+	content: '';
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin-left: 8px;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	border-top-color: #ffffff;
+	border-radius: 50%;
+	animation: bub-spin 0.6s linear infinite;
+}
+
+@keyframes bub-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* ==========================================================================
+   Responsive Styles
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+	.bub-widgets-grid {
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	}
+}
+
+@media (max-width: 768px) {
+	.bub-settings-header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 20px;
+	}
+
+	.bub-header-actions {
+		width: 100%;
+	}
+
+	.bub-header-actions .button {
+		flex: 1;
+	}
+
+	.bub-widgets-grid {
+		grid-template-columns: 1fr;
+		padding: 20px;
+	}
+
+	.bub-settings-footer {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.bub-save-settings {
+		width: 100%;
+	}
+}
+
+/* ==========================================================================
+   Elementor Icon Font Support
+   ========================================================================== */
+
+@font-face {
+	font-family: 'eicons';
+	src: url('../fonts/eicons.woff2') format('woff2'),
+	     url('../fonts/eicons.woff') format('woff'),
+	     url('../fonts/eicons.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+[class^="eicon-"],
+[class*=" eicon-"] {
+	font-family: 'eicons' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+

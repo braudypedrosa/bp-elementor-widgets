@@ -1,0 +1,70 @@
+# WordPress
+.DS_Store
+*.log
+wp-config.php
+wp-content/advanced-cache.php
+wp-content/backup-db/
+wp-content/backups/
+wp-content/blogs.dir/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/uploads/
+wp-content/wp-cache-config.php
+wp-content/plugins/hello.php
+
+# IDE & Editors
+/.vscode/
+/.idea/
+*.sublime-project
+*.sublime-workspace
+.project
+.settings/
+*.tmproj
+*.esproj
+nbproject/
+*.code-workspace
+
+# OS Files
+Thumbs.db
+Desktop.ini
+
+# Node & NPM
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Sass
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+
+# Build files
+/build/
+/dist/
+*.zip
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+
+# Testing
+/tests/
+phpunit.xml
+phpcs.xml
+.phpunit.result.cache
+
+# Composer
+/vendor/
+composer.lock
+composer.phar
+
+# Environment
+.env
+.env.local
+.env.*.local
+
