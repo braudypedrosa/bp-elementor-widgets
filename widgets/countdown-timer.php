@@ -86,19 +86,6 @@ class Countdown_Timer extends Base_Widget {
 	}
 
 	/**
-	 * Get Script Dependencies
-	 *
-	 * Returns script dependencies for this widget.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 * @return array Script handles.
-	 */
-	public function get_script_depends() {
-		return array( 'bp-elementor-widgets', 'bp-countdown-timer' );
-	}
-
-	/**
 	 * Register Widget Controls
 	 *
 	 * Register all the controls for this widget.

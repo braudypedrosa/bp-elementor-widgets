@@ -40,7 +40,7 @@ bp-elementor-widgets/
 │       ├── frontend.js
 │       ├── admin.js
 │       ├── editor.js
-│       └── countdown-timer.js
+│       └── widgets.js     # All widget-specific code
 ├── dist/                   # Compiled files (auto-generated)
 │   ├── css/
 │   │   ├── frontend.css
