@@ -308,8 +308,8 @@
 
 			// Default settings
 			const defaultSettings = {
-				prevArrow: '<button type="button" class="slick-prev bp-gallery-arrow"><i class="fas fa-chevron-left"></i></button>',
-				nextArrow: '<button type="button" class="slick-next bp-gallery-arrow"><i class="fas fa-chevron-right"></i></button>',
+				prevArrow: '<button type="button" class="slick-prev bp-gallery-arrow"><ion-icon name="chevron-back"></ion-icon></button>',
+				nextArrow: '<button type="button" class="slick-next bp-gallery-arrow"><ion-icon name="chevron-forward"></ion-icon></button>',
 				responsive: [
 					{
 						breakpoint: 768,

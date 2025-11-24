@@ -135,16 +135,15 @@ class Settings {
 			BP_ELEMENTOR_WIDGETS_VERSION
 		);
 
-		// Enqueue Font Awesome for admin.
-		wp_enqueue_style(
-			'font-awesome',
-			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+		// Enqueue Ionicons for admin.
+		wp_enqueue_script(
+			'ionicons',
+			'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js',
 			array(),
-			'6.5.1'
+			'7.1.0',
+			true
 		);
-		
-		wp_style_add_data( 'font-awesome', 'crossorigin', 'anonymous' );
-		wp_style_add_data( 'font-awesome', 'integrity', 'sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==' );
+		wp_script_add_data( 'ionicons', 'type', 'module' );
 
 		// Enqueue admin scripts.
 		wp_enqueue_script(
@@ -255,22 +254,22 @@ class Settings {
 						foreach ( $available_widgets as $widget_key => $widget_data ) {
 							$is_enabled = in_array( $widget_key, $enabled_widgets, true );
 							
-							// Map Elementor icons to Font Awesome icons.
+							// Map Elementor icons to Ionicons.
 							$icon_map = array(
-								'eicon-info-box'     => 'fas fa-info-circle',
-								'eicon-countdown'    => 'fas fa-clock',
-								'eicon-gallery-grid' => 'fas fa-images',
-								'eicon-price-table'  => 'fas fa-table',
-								'eicon-plug'         => 'fas fa-plug',
+								'eicon-info-box'     => 'information-circle',
+								'eicon-countdown'    => 'time',
+								'eicon-gallery-grid' => 'images',
+								'eicon-price-table'  => 'receipt',
+								'eicon-plug'         => 'extension-puzzle',
 							);
 							
 							$eicon = isset( $widget_data['icon'] ) ? $widget_data['icon'] : 'eicon-plug';
-							$icon = isset( $icon_map[ $eicon ] ) ? $icon_map[ $eicon ] : 'fas fa-puzzle-piece';
+							$icon = isset( $icon_map[ $eicon ] ) ? $icon_map[ $eicon ] : 'cube';
 							?>
 							<div class="bp-widget-card <?php echo $is_enabled ? 'active' : ''; ?>" data-widget="<?php echo esc_attr( $widget_key ); ?>">
 								<div class="bp-widget-header">
 									<div class="bp-widget-icon">
-										<i class="<?php echo esc_attr( $icon ); ?>"></i>
+										<ion-icon name="<?php echo esc_attr( $icon ); ?>"></ion-icon>
 									</div>
 									<div class="bp-widget-toggle">
 										<label class="bp-switch">

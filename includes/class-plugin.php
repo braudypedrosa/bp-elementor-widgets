@@ -159,17 +159,6 @@ final class Plugin {
 	 * @return void
 	 */
 	public function enqueue_frontend_styles() {
-		// Enqueue Font Awesome - load early with high priority.
-		wp_enqueue_style(
-			'font-awesome',
-			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
-			array(),
-			'6.5.1'
-		);
-		
-		wp_style_add_data( 'font-awesome', 'crossorigin', 'anonymous' );
-		wp_style_add_data( 'font-awesome', 'integrity', 'sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==' );
-
 		// Enqueue Slick Carousel CSS (base only, no theme).
 		wp_enqueue_style(
 			'slick-carousel',
@@ -178,12 +167,12 @@ final class Plugin {
 			'1.8.1'
 		);
 
-		// Note: NOT loading slick-theme.css - we use custom arrows with Font Awesome.
+		// Note: NOT loading slick-theme.css - we use custom arrows with Ionicons.
 
 		wp_enqueue_style(
 			'bp-elementor-widgets',
 			BP_ELEMENTOR_WIDGETS_URL . 'dist/css/frontend.min.css',
-			array( 'font-awesome', 'slick-carousel' ),
+			array( 'slick-carousel' ),
 			BP_ELEMENTOR_WIDGETS_VERSION
 		);
 	}
@@ -198,6 +187,26 @@ final class Plugin {
 	 * @return void
 	 */
 	public function enqueue_frontend_scripts() {
+		// Enqueue Ionicons (Web Components).
+		wp_enqueue_script(
+			'ionicons',
+			'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js',
+			array(),
+			'7.1.0',
+			true
+		);
+		wp_script_add_data( 'ionicons', 'type', 'module' );
+
+		// Ionicons fallback for older browsers.
+		wp_enqueue_script(
+			'ionicons-legacy',
+			'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js',
+			array(),
+			'7.1.0',
+			true
+		);
+		wp_script_add_data( 'ionicons-legacy', 'nomodule', true );
+
 		// Register Slick Carousel JS.
 		wp_register_script(
 			'slick-carousel',
@@ -219,7 +228,7 @@ final class Plugin {
 		wp_register_script(
 			'bp-elementor-widgets-widgets',
 			BP_ELEMENTOR_WIDGETS_URL . 'dist/js/widgets.min.js',
-			array( 'jquery', 'slick-carousel', 'elementor-frontend' ),
+			array( 'jquery', 'slick-carousel', 'ionicons', 'elementor-frontend' ),
 			BP_ELEMENTOR_WIDGETS_VERSION,
 			true
 		);

@@ -127,18 +127,13 @@
 		line-height: 0 !important;
 	}
 	
-	// Font Awesome icon styling
-	i {
-		font-family: "Font Awesome 6 Free" !important;
-		font-weight: 900 !important; // Required for 'fas' solid icons
-		font-style: normal !important;
+	// Ionicon styling
+	ion-icon {
 		font-size: 24px !important;
 		line-height: 1 !important;
 		display: block !important;
 		color: #ffffff !important;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		text-rendering: auto;
+		--ionicon-stroke-width: 32px; // Make icons slightly bolder
 	}
 }
 
@@ -291,7 +286,7 @@
 			right: 10px !important;
 		}
 		
-		i {
+		ion-icon {
 			font-size: 18px !important;
 		}
 	}
@@ -322,7 +317,7 @@
 			right: 5px !important;
 		}
 		
-		i {
+		ion-icon {
 			font-size: 16px !important;
 		}
 	}
