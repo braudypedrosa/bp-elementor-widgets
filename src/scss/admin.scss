@@ -1,0 +1,396 @@
+/**
+ * Admin Styles
+ *
+ * Styles for the BP Elementor Widgets settings page in WordPress admin.
+ *
+ * @package BP_Elementor_Widgets
+ * @since 1.0.0
+ */
+
+// Import Variables and Mixins
+@import 'variables';
+@import 'mixins';
+
+// Settings Page Layout
+.bp-widgets-settings {
+	margin: $spacing-lg $spacing-lg 0 0;
+}
+
+.bp-settings-container {
+	max-width: 1400px;
+	background: #ffffff;
+	border: 1px solid #dcdcdc;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+	margin-top: $spacing-lg;
+}
+
+// Header Section
+.bp-settings-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: $spacing-xl;
+	border-bottom: 1px solid $color-border-medium;
+	@include gradient-primary;
+	color: #ffffff;
+
+	h2 {
+		margin: 0 0 8px 0;
+		font-size: 28px;
+		font-weight: $font-weight-semibold;
+		color: #ffffff;
+	}
+
+	.description {
+		margin: 0;
+		font-size: $font-size-small;
+		color: rgba(255, 255, 255, 0.9);
+		max-width: 600px;
+	}
+}
+
+.bp-header-actions {
+	display: flex;
+	gap: $spacing-sm;
+
+	.button {
+		background: rgba(255, 255, 255, 0.2);
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		color: #ffffff;
+		text-shadow: none;
+		padding: 8px $spacing-md;
+		height: auto;
+		@include transition(all);
+
+		&:hover {
+			background: rgba(255, 255, 255, 0.3);
+			border-color: rgba(255, 255, 255, 0.5);
+			color: #ffffff;
+		}
+	}
+}
+
+// Widgets Grid
+.bp-widgets-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+	gap: $spacing-lg;
+	padding: $spacing-xl;
+}
+
+.bp-no-widgets {
+	grid-column: 1 / -1;
+	text-align: center;
+	padding: 60px $spacing-lg;
+	color: $color-text-medium;
+	font-size: $font-size-base;
+}
+
+// Widget Cards
+.bp-widget-card {
+	position: relative;
+	background: #ffffff;
+	border: 2px solid $color-border-medium;
+	border-radius: $border-radius-md;
+	padding: $spacing-lg;
+	@include transition(all);
+	opacity: 0.7;
+
+	&:hover {
+		transform: translateY(-3px);
+		@include box-shadow(3);
+	}
+
+	&.active {
+		border-color: $color-secondary;
+		opacity: 1;
+		background: linear-gradient(to bottom right, #ffffff 0%, #f9f9ff 100%);
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 3px;
+			@include gradient-primary;
+			border-radius: $border-radius-md $border-radius-md 0 0;
+		}
+	}
+}
+
+// Widget Card Header
+.bp-widget-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: $spacing-md;
+}
+
+.bp-widget-icon {
+	width: 50px;
+	height: 50px;
+	@include flex-center;
+	@include gradient-primary;
+	border-radius: $border-radius-md;
+	color: #ffffff;
+	font-size: $font-size-xlarge;
+	@include transition(all);
+
+	.bp-widget-card.active & {
+		transform: scale(1.05);
+		box-shadow: 0 4px 15px rgba($color-secondary, 0.3);
+	}
+}
+
+// Widget Toggle Switch
+.bp-widget-toggle {
+	flex-shrink: 0;
+}
+
+.bp-switch {
+	position: relative;
+	display: inline-block;
+	width: 50px;
+	height: 26px;
+
+	input {
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+}
+
+.bp-slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	@include transition(all, 0.4s);
+	border-radius: 26px;
+
+	&:before {
+		position: absolute;
+		content: "";
+		height: 20px;
+		width: 20px;
+		left: 3px;
+		bottom: 3px;
+		background-color: white;
+		@include transition(all, 0.4s);
+		border-radius: $border-radius-round;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	}
+
+	input:checked + & {
+		@include gradient-primary;
+	}
+
+	input:checked + &:before {
+		transform: translateX(24px);
+	}
+}
+
+// Widget Card Body
+.bp-widget-body {
+	padding: $spacing-sm 0;
+}
+
+.bp-widget-title {
+	margin: 0 0 8px 0;
+	font-size: $font-size-large;
+	font-weight: $font-weight-semibold;
+	color: #23282d;
+	@include transition(color);
+
+	.bp-widget-card.active & {
+		color: $color-secondary;
+	}
+}
+
+.bp-widget-description {
+	margin: 0;
+	font-size: $font-size-small;
+	line-height: 1.6;
+	color: $color-text-medium;
+}
+
+// Widget Card Footer
+.bp-widget-footer {
+	margin-top: $spacing-md;
+	padding-top: $spacing-md;
+	border-top: 1px solid $color-border-medium;
+}
+
+.bp-demo-link {
+	display: inline-block;
+	font-size: 13px;
+	color: $color-secondary;
+	text-decoration: none;
+	font-weight: $font-weight-medium;
+	@include transition(color);
+
+	&:hover {
+		color: $color-secondary-dark;
+	}
+
+	&::after {
+		content: ' →';
+		display: inline-block;
+		@include transition(transform);
+	}
+
+	&:hover::after {
+		transform: translateX(3px);
+	}
+}
+
+// Settings Footer
+.bp-settings-footer {
+	display: flex;
+	align-items: center;
+	gap: $spacing-md;
+	padding: 25px $spacing-xl;
+	border-top: 1px solid $color-border-medium;
+	background: #f9f9f9;
+}
+
+.bp-save-settings {
+	padding: $spacing-sm $spacing-xl !important;
+	height: auto !important;
+	font-size: $font-size-base !important;
+	@include gradient-primary;
+	border: none !important;
+	box-shadow: 0 4px 15px rgba($color-secondary, 0.3) !important;
+	transition: all $transition-base !important;
+
+	&:hover {
+		transform: translateY(-2px) !important;
+		box-shadow: 0 6px 20px rgba($color-secondary, 0.4) !important;
+	}
+
+	&:active {
+		transform: translateY(0) !important;
+	}
+
+	&.loading {
+		opacity: 0.6;
+		pointer-events: none;
+
+		&::after {
+			content: '';
+			display: inline-block;
+			width: 14px;
+			height: 14px;
+			margin-left: 8px;
+			border: 2px solid rgba(255, 255, 255, 0.3);
+			border-top-color: #ffffff;
+			border-radius: $border-radius-round;
+			animation: bp-spin 0.6s linear infinite;
+		}
+	}
+}
+
+@include keyframes(bp-spin) {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.bp-save-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-size: $font-size-small;
+	font-weight: $font-weight-medium;
+	opacity: 0;
+	@include transition(opacity);
+
+	&.show {
+		opacity: 1;
+	}
+
+	&.success {
+		color: #46b450;
+	}
+
+	&.error {
+		color: $color-error;
+	}
+
+	&::before {
+		content: '✓';
+		display: inline-block;
+		width: 18px;
+		height: 18px;
+		line-height: 18px;
+		text-align: center;
+		border-radius: $border-radius-round;
+		font-size: $font-size-xsmall;
+		background: currentColor;
+		color: #ffffff;
+	}
+
+	&.error::before {
+		content: '✕';
+	}
+}
+
+// Responsive Styles
+@include tablet {
+	.bp-settings-header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: $spacing-lg;
+	}
+
+	.bp-header-actions {
+		width: 100%;
+
+		.button {
+			flex: 1;
+		}
+	}
+
+	.bp-widgets-grid {
+		grid-template-columns: 1fr;
+		padding: $spacing-lg;
+	}
+
+	.bp-settings-footer {
+		flex-direction: column;
+		align-items: stretch;
+
+		.bp-save-settings {
+			width: 100%;
+		}
+	}
+}
+
+// Elementor Icon Font Support
+@font-face {
+	font-family: 'eicons';
+	src: url('../fonts/eicons.woff2') format('woff2'),
+	     url('../fonts/eicons.woff') format('woff'),
+	     url('../fonts/eicons.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+[class^="eicon-"],
+[class*=" eicon-"] {
+	font-family: 'eicons' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+

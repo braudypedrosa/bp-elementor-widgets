@@ -68,3 +68,7 @@ composer.phar
 .env.local
 .env.*.local
 
+# Keep old assets folder temporarily for reference
+# Remove assets/ folder once build is confirmed working
+/assets/
+

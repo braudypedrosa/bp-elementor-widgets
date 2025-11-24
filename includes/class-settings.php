@@ -129,16 +129,16 @@ class Settings {
 
 		// Enqueue admin styles.
 		wp_enqueue_style(
-			'bub-elementor-widgets-admin',
-			BP_ELEMENTOR_WIDGETS_URL . 'assets/css/admin.css',
+			'bp-elementor-widgets-admin',
+			BP_ELEMENTOR_WIDGETS_URL . 'dist/css/admin.min.css',
 			array(),
 			BP_ELEMENTOR_WIDGETS_VERSION
 		);
 
 		// Enqueue admin scripts.
 		wp_enqueue_script(
-			'bub-elementor-widgets-admin',
-			BP_ELEMENTOR_WIDGETS_URL . 'assets/js/admin.js',
+			'bp-elementor-widgets-admin',
+			BP_ELEMENTOR_WIDGETS_URL . 'dist/js/admin.min.js',
 			array( 'jquery' ),
 			BP_ELEMENTOR_WIDGETS_VERSION,
 			true

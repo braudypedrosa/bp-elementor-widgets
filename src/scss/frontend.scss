@@ -1,0 +1,27 @@
+/**
+ * Frontend Styles
+ *
+ * Main stylesheet for BP Elementor Widgets on the frontend.
+ *
+ * @package BP_Elementor_Widgets
+ * @since 1.0.0
+ */
+
+// Import Variables and Mixins
+@import 'variables';
+@import 'mixins';
+
+// Import Widget Styles
+@import 'widgets/info-box';
+@import 'widgets/countdown-timer';
+
+// Utility Classes
+.bp-widget-hidden {
+	display: none !important;
+}
+
+.bp-widget-loading {
+	opacity: 0.5;
+	pointer-events: none;
+}
+

@@ -161,7 +161,7 @@ final class Plugin {
 	public function enqueue_frontend_styles() {
 		wp_enqueue_style(
 			'bp-elementor-widgets',
-			BP_ELEMENTOR_WIDGETS_URL . 'assets/css/frontend.css',
+			BP_ELEMENTOR_WIDGETS_URL . 'dist/css/frontend.min.css',
 			array(),
 			BP_ELEMENTOR_WIDGETS_VERSION
 		);
@@ -179,7 +179,7 @@ final class Plugin {
 	public function enqueue_frontend_scripts() {
 		wp_register_script(
 			'bp-elementor-widgets',
-			BP_ELEMENTOR_WIDGETS_URL . 'assets/js/frontend.js',
+			BP_ELEMENTOR_WIDGETS_URL . 'dist/js/frontend.min.js',
 			array( 'jquery' ),
 			BP_ELEMENTOR_WIDGETS_VERSION,
 			true
@@ -188,7 +188,7 @@ final class Plugin {
 		// Register countdown timer script.
 		wp_register_script(
 			'bp-countdown-timer',
-			BP_ELEMENTOR_WIDGETS_URL . 'assets/js/countdown-timer.js',
+			BP_ELEMENTOR_WIDGETS_URL . 'dist/js/countdown-timer.min.js',
 			array( 'jquery', 'elementor-frontend' ),
 			BP_ELEMENTOR_WIDGETS_VERSION,
 			true
@@ -206,8 +206,8 @@ final class Plugin {
 	 */
 	public function enqueue_editor_scripts() {
 		wp_enqueue_script(
-			'bub-elementor-widgets-editor',
-			BP_ELEMENTOR_WIDGETS_URL . 'assets/js/editor.js',
+			'bp-elementor-widgets-editor',
+			BP_ELEMENTOR_WIDGETS_URL . 'dist/js/editor.min.js',
 			array( 'jquery' ),
 			BP_ELEMENTOR_WIDGETS_VERSION,
 			true

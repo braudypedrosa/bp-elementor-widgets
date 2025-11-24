@@ -1,0 +1,165 @@
+/**
+ * Countdown Timer Widget Styles
+ *
+ * @package BP_Elementor_Widgets
+ * @since 1.0.0
+ */
+
+.bp-countdown-timer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: $spacing-md;
+}
+
+// Countdown Items
+.bp-countdown-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	min-width: 100px;
+	padding: $spacing-lg 25px;
+	@include transition(all);
+}
+
+// Boxed Style (Default)
+.bp-countdown-style-boxed {
+	.bp-countdown-item {
+		background-color: $color-bg-light;
+		border: 2px solid $color-border-light;
+		border-radius: $border-radius-sm;
+
+		&:hover {
+			transform: translateY(-3px);
+			@include box-shadow(3);
+		}
+	}
+}
+
+// No Borders Style
+.bp-countdown-style-no-borders {
+	.bp-countdown-item {
+		background: transparent;
+		border: none;
+		padding: $spacing-sm $spacing-md;
+
+		&:hover {
+			opacity: 0.8;
+		}
+	}
+}
+
+// Digits
+.bp-countdown-digit {
+	display: block;
+	font-size: $font-size-huge;
+	font-weight: $font-weight-bold;
+	line-height: 1;
+	color: $color-text-dark;
+	margin-bottom: $spacing-sm;
+	font-family: $font-family-base;
+
+	&.bp-countdown-tick {
+		animation: bp-countdown-pulse 0.3s ease;
+	}
+}
+
+@include keyframes(bp-countdown-pulse) {
+	0%, 100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.05);
+	}
+}
+
+// Labels
+.bp-countdown-label {
+	display: block;
+	font-size: $font-size-small;
+	font-weight: $font-weight-medium;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: $color-text-medium;
+	line-height: 1;
+}
+
+// Separator
+.bp-countdown-separator {
+	display: flex;
+	align-items: center;
+	font-size: 32px;
+	font-weight: $font-weight-bold;
+	color: $color-text-dark;
+	opacity: 0.5;
+	margin: 0 $spacing-xs;
+	align-self: flex-start;
+	padding-top: $spacing-sm;
+
+	.bp-countdown-style-no-borders & {
+		opacity: 0.3;
+	}
+}
+
+// Finished State
+.bp-countdown-timer.bp-countdown-finished {
+	.bp-countdown-digit {
+		opacity: 0.5;
+		color: $color-error;
+	}
+
+	.bp-countdown-item {
+		background-color: $color-error-bg;
+		border-color: $color-error-border;
+	}
+}
+
+// Responsive Styles
+@include tablet {
+	.bp-countdown-timer {
+		gap: $spacing-sm;
+	}
+
+	.bp-countdown-item {
+		min-width: 80px;
+		padding: $spacing-md $spacing-lg;
+	}
+
+	.bp-countdown-digit {
+		font-size: 36px;
+		margin-bottom: 8px;
+	}
+
+	.bp-countdown-label {
+		font-size: $font-size-xsmall;
+	}
+
+	.bp-countdown-separator {
+		font-size: 24px;
+		margin: 0 3px;
+	}
+}
+
+@include mobile {
+	.bp-countdown-item {
+		min-width: 70px;
+		padding: 12px $spacing-md;
+	}
+
+	.bp-countdown-digit {
+		font-size: 28px;
+		margin-bottom: 6px;
+	}
+
+	.bp-countdown-label {
+		font-size: 10px;
+	}
+
+	.bp-countdown-separator {
+		font-size: 20px;
+	}
+}
+

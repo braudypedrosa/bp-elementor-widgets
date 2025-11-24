@@ -379,7 +379,6 @@ class Countdown_Timer extends Base_Widget {
 				'default' => 'boxed',
 				'options' => array(
 					'boxed'      => esc_html__( 'Boxed', 'bp-elementor-widgets' ),
-					'rounded'    => esc_html__( 'Rounded', 'bp-elementor-widgets' ),
 					'no-borders' => esc_html__( 'No Borders', 'bp-elementor-widgets' ),
 				),
 			)
