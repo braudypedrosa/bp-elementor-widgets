@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: BP Elementor Widgets
- * Plugin URI: https://yourwebsite.com/
+ * Plugin URI: https://buildupbookings.com/
  * Description: A collection of custom Elementor widgets to enhance your website building experience.
- * Version: 1.0.1
- * Author: BP
- * Author URI: https://yourwebsite.com/
+ * Version: 1.0.2
+ * Author: Braudy Pedrosa
+ * Author URI: https://buildupbookings.com/
  * Text Domain: bp-elementor-widgets
  * Domain Path: /languages
  * Requires at least: 5.8
@@ -22,7 +22,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Current plugin version.
  */
-define( 'BP_ELEMENTOR_WIDGETS_VERSION', '1.0.1' );
+define( 'BP_ELEMENTOR_WIDGETS_VERSION', '1.0.2' );
 
 /**
  * Plugin directory path.
