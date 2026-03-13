@@ -3,7 +3,7 @@
  * Plugin Name: BP Elementor Widgets
  * Plugin URI: https://yourwebsite.com/
  * Description: A collection of custom Elementor widgets to enhance your website building experience.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: BP
  * Author URI: https://yourwebsite.com/
  * Text Domain: bp-elementor-widgets
@@ -22,7 +22,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Current plugin version.
  */
-define( 'BP_ELEMENTOR_WIDGETS_VERSION', '1.0.0' );
+define( 'BP_ELEMENTOR_WIDGETS_VERSION', '1.0.1' );
 
 /**
  * Plugin directory path.

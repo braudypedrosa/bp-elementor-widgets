@@ -153,12 +153,6 @@ window.BpWidgets.CountdownTimer = {
 		$timer.find('.bp-countdown-hours').text(formattedHours);
 		$timer.find('.bp-countdown-minutes').text(formattedMinutes);
 		$timer.find('.bp-countdown-seconds').text(formattedSeconds);
-
-		// Add animation class for visual feedback
-		$timer.find('.bp-countdown-digit').addClass('bp-countdown-tick');
-		setTimeout(function () {
-			$timer.find('.bp-countdown-digit').removeClass('bp-countdown-tick');
-		}, 300);
 	},
 
 	/**

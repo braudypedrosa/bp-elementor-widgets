@@ -136,7 +136,7 @@ const build = gulp.series(clean, gulp.parallel(compileSCSS, compileJS));
  * Creates a deployable ZIP file of the plugin
  */
 function createZip() {
-	return gulp.src(paths.deploy, { base: '..' })
+	return gulp.src(paths.deploy, { base: '.' })
 		.pipe(rename(function(path) {
 			path.dirname = 'bp-elementor-widgets/' + path.dirname;
 		}))

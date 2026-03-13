@@ -55,19 +55,6 @@
 	color: $color-text-dark;
 	margin-bottom: $spacing-sm;
 	font-family: $font-family-base;
-
-	&.bp-countdown-tick {
-		animation: bp-countdown-pulse 0.3s ease;
-	}
-}
-
-@include keyframes(bp-countdown-pulse) {
-	0%, 100% {
-		transform: scale(1);
-	}
-	50% {
-		transform: scale(1.05);
-	}
 }
 
 // Labels
